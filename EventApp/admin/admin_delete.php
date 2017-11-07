@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
     if (!isset($_SESSION['userID'])) {
         header("Location:../index.php");
@@ -9,12 +9,10 @@ include("admin_menu.php");
 include("../userinfo.php");
 ?>
 
-<div class="addEvent">
-        <a href="admin_add.php"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-</div>
 
-<div class="allEvents" style="padding-top: 30px;">
-      <?php 
+
+<div class="allEvents" style="padding-top: 100px;">
+      <?php
         //session_start();
         @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 
@@ -22,7 +20,7 @@ include("../userinfo.php");
             echo "could not connect: " . $db->connect_error;
             exit();
         }
-    
+
     //This deletes the event from the DB.
     if (isset($_POST['minus'])){
 
@@ -34,21 +32,21 @@ include("../userinfo.php");
         $deleteQuery = "DELETE FROM Events WHERE eventID = '{$eventid}'";
         //$stmt->bind_param('i', $eventID);
         $stmt = $db->prepare($deleteQuery);
-        $stmt->execute();             
+        $stmt->execute();
 
     }
-        
-        
+
+
         //this selects all event information from the Events db
         $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate AND time";
         $stmt = $db->prepare($query);
         //binds the db information to the variables
         $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
         $stmt->execute();
-        
+
         //gets every event in a row and displays the information in the div "eventContainer"
         while($stmt->fetch()){ ?>
-            
+
        <!---------------------------------EVENT ONE-->
        <div class="eventContainerOne">
           <!-----------event img & attend event btn-->
@@ -60,31 +58,31 @@ include("../userinfo.php");
           <!---------event information & expand btn-->
           <div class="infoContainer">
               <div class="eventTitle">
-                 <?php 
+                 <?php
                     echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p> <p><strong>Location: </strong> $location</p>";
                   ?>
-              </div> 
+              </div>
               <a href="#" class="expanderBtn">
                   <i class="fa fa-angle-down" aria-hidden="true"></i>
               </a>
               <p class="eventDescription">
                 <?php echo "$description $host";?>
-              </p>  
+              </p>
             </div>
        </div>
-       
-       <?php  } 
-    
-    
+
+       <?php  }
+
+
     ?>
 
-      
-       
-       
+
+
+
     </div>
-       
-       
-<?php 
+
+
+<?php
 include("../footer.php");
 
 ?>

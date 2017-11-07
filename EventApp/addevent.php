@@ -16,9 +16,9 @@ include("userinfo.php");
     <?php
          $host = $_SESSION['organisation'];
         $school = $_SESSION['school'];
-        echo $host;
-        echo $school;
-        
+        // echo $host;
+        // echo $school;
+
       if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
 
         $title = $_POST['title'];
@@ -26,7 +26,7 @@ include("userinfo.php");
         $time = $_POST['time'];
         $location = $_POST['location'];
         $description = $_POST['description'];
-          
+
         // echo "$title, $location, $description";
         // exit();
 
@@ -42,7 +42,7 @@ include("userinfo.php");
              echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
         }
 
-        if($_FILES['upload']['size'] > 1000000){
+        if($_FILES['upload']['size'] > 10000000){
           $error[]='The file exceeded the upload limit';
             echo("<p style='margin-top:150px; color:'black';>The file exceeded the upload limit</p>");
         }

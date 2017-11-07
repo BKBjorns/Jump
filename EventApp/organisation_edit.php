@@ -2,23 +2,14 @@
 
 session_start();
 if (!isset($_SESSION['userID'])) {
-    header("Location:../index.php");
+    header("Location:index.php");
 }
 
-include("admin_header.php");
-include("admin_menu.php");
-//include("../userinfo.php");
+include("header.php");
+include("menu.php");
+include("userinfo.php");
 
 ?>
-
-
-    <div class="userInfo">
-        <div class="adminImg"></div>
-        <div class="userWelcome">Hi <?php
-            //session_start();
-            echo $_SESSION['username'];
-            ?>! These are your events</div>
-    </div>
     <div class="addEvent">
 
     <?php
@@ -34,13 +25,13 @@ include("admin_menu.php");
 
         $eventid = trim($_GET['eventID']);
 //        $eventid = 39;
-        echo "$eventid";
+        //echo "$eventid";
 
         $getQuery = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link FROM Events WHERE eventID = {$eventid}";
         echo $getQuery;
         $stmt = $db->prepare($getQuery);
-        $stmt->execute();
         $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link);
+        $stmt->execute();
 
 
         echo $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link;
@@ -53,7 +44,7 @@ include("admin_menu.php");
         <input type='text' name='location' value='<?php echo $image ?>' class=''>
         <input type='textarea' rows="5" name='description' value='<?php echo $description ?>' class=''>
         <h4>Picture upload</h4>
-        <input type="file" name="upload" value="<?php $image ?>"><br>
+        <input type="file" name="upload" value="<?php echo $image ?>"><br>
 
 
         <div class="bContainer">
@@ -96,14 +87,14 @@ if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
 
         if(empty($error)){
           $image = $_FILES['upload']['name'];
-          move_uploaded_file($_FILES['upload']['tmp_name'], "../uploadedfiles/" . $image);
+          move_uploaded_file($_FILES['upload']['tmp_name'], "uploadedfiles/" . $image);
 
           $updateQuery = ("UPDATE Events SET title= '{$title}', description='{$description}', startdate='{$date}', time='{$time}',price='{$price}',location='{$location}', image='{$image}' WHERE eventID = '{$eventid}'");
 
           $stmt = $db->prepare($updateQuery);
           $stmt->execute();
           echo "success!";
-          header("location:admin_events.php");
+          header("location:organisation_events.php");
         }
 
       }
@@ -111,6 +102,6 @@ if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
 
 
 <?php
-include("../footer.php");
+include("footer.php");
 
 ?>

@@ -1,10 +1,10 @@
 <?php
     include("config.php");
     include("header.php");
-    
+
     session_start();
     $type = $_SESSION['type'];
-    echo $type;
+    //echo $type;
 
 
 if ( $type == 'student'){?>
@@ -32,7 +32,7 @@ if ( $type == 'student'){?>
             <div class="line three"></div>
         </div>
         <ul id="dropDown">
-            <li><a class="dropDownLink <?php echo($current_page == 'events.php') ? 'active' : NULL?>" href="events.php">Event Overview</a></li>
+            <li><a class="dropDownLink <?php echo($current_page == 'organisation_events.php') ? 'active' : NULL?>" href="organisation_events.php">Event Overview</a></li>
             <li><a class="dropDownLink <?php echo($current_page == 'organisation.php'|| $current_page == "" ) ? 'active' : NULL?>" href="organisation.php">My Events</a></li>
             <li><a class="dropDownLink <?php echo($current_page == 'search.php'|| $current_page == "" ) ? 'active' : NULL?>" href="search.php">Search</a></li>
             <li><a class="dropDownLink" href="logout.php">Log Out</a></li>
@@ -40,7 +40,3 @@ if ( $type == 'student'){?>
 </header>
 
 <?php } ?>
-
-
-
-  

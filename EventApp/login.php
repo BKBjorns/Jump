@@ -1,7 +1,16 @@
 <?php
 session_start();
 ob_start();
+include("header.php");
 
+//connecting the a new database, which is still Jump defined in config.php
+@ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+
+  //check if there is a connection to the database
+if ($db->connect_error) {
+  echo "could not connect: " . $db->connect_error;
+  exit();
+}
 
 //start the session and check if session has been created before if so take user to user page if not create a new session with the user email when user logged in
 //session_start();
@@ -27,14 +36,10 @@ if (isset($_SESSION['userID'])) {
 }
 
 
-// if (isset($_SESSION['userID']) && $type == 'student') {
-//     //if the statement is true = if a session is set, take the user to the user page
-//      header("location:admin/user.php");
-//     exit();
-//     }
 
 
-include("header.php");
+
+
 
 
 // check if sth. is entered in the input field = it is not empty by using the if statement
@@ -45,14 +50,7 @@ if(isset($_POST) && !empty($_POST)){
     $password =  stripslashes($_POST['password']);
 
 
-	//connecting the a new database, which is still Jump defined in config.php
-	@ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 
-    //check if there is a connection to the database
-	if ($db->connect_error) {
-		echo "could not connect: " . $db->connect_error;
-		exit();
-	}
 
 
     //prepare the database and select the username and userpassword typed into the input fields
@@ -76,8 +74,8 @@ if(isset($_POST) && !empty($_POST)){
             $_SESSION['organisation'] = $organisation;
             $_SESSION['type'] = $type;
             $_SESSION['school'] = $school;
-            
-            
+
+
 
 
 

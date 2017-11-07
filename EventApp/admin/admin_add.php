@@ -15,11 +15,11 @@ include("../userinfo.php");
 //    if($type == 'organisation'){
 //        header("location:../login.php");
 //        exit();
-//        
+//
 //    } else if($type == 'student'){
 //        header("location:../login.php");
-//        exit();  
-//    } 
+//        exit();
+//    }
 ?>
     <div class="addEvent">
 
@@ -32,6 +32,7 @@ include("../userinfo.php");
         $location = $_POST['location'];
         $host = $_POST['host'];
         $description = $_POST['description'];
+        $school = $_POST['school'];
 
         // echo "$title, $location, $description";
         // exit();
@@ -66,7 +67,7 @@ include("../userinfo.php");
 
           move_uploaded_file($_FILES['upload']['tmp_name'], "../uploadedfiles/" . $image);
 
-        $uploadQuery = ("INSERT INTO `Events`(`title`, `description`, `startdate`, `time`, `image`, `location`, `host`) VALUES ('$title', '$description', '$date', '$time', '$image', '$location', '$host')");
+        $uploadQuery = ("INSERT INTO `Events`(`title`, `description`, `startdate`, `time`, `image`, `location`, `host`, school) VALUES ('$title', '$description', '$date', '$time', '$image', '$location', '$host', '$school')");
 
           $stmt = $db->prepare($uploadQuery);
           $stmt->execute();
@@ -84,7 +85,7 @@ include("../userinfo.php");
         <input type='text' name='location' placeholder='Event Location' class=''>
         <select name="host" value="host" style="padding-top = 25px;">
 
-           <?php 
+           <?php
             $hostDropQuery = "SELECT organisation FROM Users WHERE `type` = 'organisation'";
             $stmt = $db->prepare($hostDropQuery);
             $stmt->execute();
@@ -93,15 +94,33 @@ include("../userinfo.php");
             $result1 = mysqli_query($db, $hostDropQuery);
             ?>
             <option value = "" disable selected>Select Host</option>
-            
-            <?php 
+
+            <?php
             while ($stmt-> fetch()){
                 ?>
             <option value="<?php echo $organisation;?>"><?php echo $organisation; ?></option>
-    <?php } 
+    <?php }
     print_r ($array);?>
 
-</select>
+  </select>
+  <select id='selectSchool' name="school">
+
+  <option value = "" disable selected>Select School</option>
+
+      <?php
+      $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
+      $stmt = $db->prepare($schoolDropQuery);
+      $stmt->execute();
+      $stmt -> bind_result($schoolID, $school);
+      $array = array();
+
+
+              while ($stmt-> fetch()){
+                  ?>
+              <option value="<?php echo $schoolID;?>"><?php echo $school; ?></option>
+      <?php } ?>
+  </select>
+
         <input type='textarea' rows="5" name='description' placeholder='Event Description' class=''>
         <h4>Picture upload</h4>
         <input type="file" name="upload"><br>
