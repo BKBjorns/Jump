@@ -1,0 +1,61 @@
+div.allUsers{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100vw;
+    height: 100vh;
+    padding: 30px 10px 10px 10px;
+    box-sizing: border-box;
+    margin-top: 130px;
+    
+    
+    div.userContainer{
+        width: 100%;
+        box-shadow: 0px 0.5px 1px @color-grey;
+        border-radius: 2px;
+        margin-top: 20px;
+        position: relative;
+        height: 100px;
+        
+    
+        div.student, div.organisation{
+            height: 40px;
+            background-color: @color-base;
+            color: #fff;
+            text-align: center;
+            
+            h3{
+                padding-top: 7px;
+            }
+        }
+        div.organisation{
+            background-color: #9c4590;
+        }
+        form{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            input.plusBtn, input.editBtn{
+                 width: 20px;
+                 height: 20px;            
+                 background: @color-transparent;
+                 border: solid 0.4px @color-grey;
+                 border-radius: 10px;
+                 box-shadow: 0px 0.5px 0.5px @color-grey;
+                 font-weight: 300;
+                 font-family: @font-base;
+                 color: @color-grey;
+            }
+        }
+        div.infoContainer{
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    }
+    
+}
+
+
+
+
+

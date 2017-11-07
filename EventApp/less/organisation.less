@@ -1,0 +1,78 @@
+div.organisationImg{
+        width: 50px;
+        height: 50px;
+        background-image: url(../img/hint.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        border-radius: 25px;
+        border: solid 1px white;
+        float: left;
+        margin: 20px 5px 0 10px;
+        //z-index: 8;
+}
+
+div.addEvent{
+    a{
+        i.fa.fa-plus-circle{
+            z-index: 1;
+            color: @color-base;
+            font-size: 50px;
+            text-align: right;
+            position: fixed;
+            right: 10px;
+            background-color: #fff;
+            border-radius: 100px;
+        }
+    }
+}
+
+form{
+  
+    input.editBtn{
+        position: relative;
+    }
+    span.edit{
+        position: absolute;
+        top: 0px;
+        left: 6px;
+        z-index: 15;
+        
+        i.fa.fa-pencil{
+            font-size: 10px;
+            color: @color-grey;
+        }
+    }
+}
+
+div.allEvents{
+    div.addEvent{
+        overflow: hidden;
+        border-bottom: solid 0.5px @color-grey;
+        padding: 20px 10px 20px 20px;
+        p{
+            display: inline-block;
+        }
+        a.plusBtn{
+            display: inline-block;
+            float: right;
+            width: 20px;    
+            height: 20px;            
+            background: @color-transparent;
+            border: solid 0.4px @color-grey;
+            border-radius: 10px;
+            box-shadow: 0px 0.5px 0.5px @color-grey;
+            font-weight: 300;
+            font-family: @font-base;
+            color: @color-grey;
+            margin: 0 auto;
+            
+            span.plus{
+                padding-left: 5px;
+            }
+          
+        }
+        
+    }
+    
+}

@@ -1,0 +1,110 @@
+header{
+    background-color: @color-base;
+    width: 100%;
+    height: 60px;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    .logo{
+        background-image: url(../img/logo_white.png);
+        height: 50px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+
+/*************Creates the lines for the hamburger menu*****/ 
+#hamburger{
+    position: fixed;
+    margin-left: 10px;
+    z-index: 10;
+    margin-top: -37px;
+    
+    
+    .line{
+        display: block;
+        height: 6px;
+        width: 40px;
+        margin: 5px auto;
+        background: #ffffff;
+        border-radius: 10px;
+    }
+}
+    
+    .one{
+        transition: .5s ease-in-out;
+        -webkit-transition:.5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+    }
+
+   .two{
+        transition: .5s ease-in-out;
+       -webkit-transition:.5s ease-in-out;
+       -moz-transition: .5s ease-in-out;
+    }
+
+    .three{
+        transition: .5s ease-in-out;
+        -webkit-transition: .5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+    }
+/*This is how the lines should move, Should happen when you click**/
+    .one.open{
+	    transform: translateY(13px) rotateZ(45deg);
+        transition: .5s ease-in-out;
+        -webkit-transition: .5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+    }
+
+   .two.open{
+	    width: 0;
+        opacity: 0;
+        transition: .5s ease-in-out;
+       -webkit-transition: .5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+    }
+
+    .three.open{
+	    transform: translateY(-10px) rotateZ(-45deg);
+        transition: .5s ease-in-out;
+        -webkit-transition: .5s ease-in-out;
+        -moz-transition: .5s ease-in-out;
+    }
+
+    
+/****This is the menu dropdown, what should be seen on click**/
+    #dropDown{
+        display: none;
+        width: 100%;
+        height: 100vh;
+        opacity: 1;
+        clear: both;
+        background-image: url(../img/gradient.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        list-style: none;
+        margin: 0 auto;
+        text-align: center;
+        padding: 145px 0 0 0;
+        
+            li{
+                margin-top: 10px;
+                border-bottom: 2px solid #ffffff;
+                width: 190px;
+                padding: 20px;
+                margin-top: 0;
+                display: inline-block;
+
+                a.dropDownLink{
+                    text-decoration: none;
+                    font-family: @font-base;
+                    color: #ffffff;
+                    font-size: 25px;
+                }
+            }
+    }
+}
