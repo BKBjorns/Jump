@@ -26,6 +26,7 @@ include("userinfo.php");
         $time = $_POST['time'];
         $location = $_POST['location'];
         $description = $_POST['description'];
+        $country = $_POST['country'];
 
         // echo "$title, $location, $description";
         // exit();
@@ -60,7 +61,7 @@ include("userinfo.php");
 
           move_uploaded_file($_FILES['upload']['tmp_name'], "uploadedfiles/" . $image);
 
-         $uploadQuery = ("INSERT INTO `Events`(`title`, `description`, `startdate`, `time`, `location`, `image`, `host`, `school`) VALUES ('$title', '$description', '$date', '$time','$location', '$image', '$host', '$school')");
+         $uploadQuery = ("INSERT INTO `Events`(`title`, `description`, `startdate`, `time`, `location`, `image`, `host`, `school`, `country`) VALUES ('$title', '$description', '$date', '$time','$location', '$image', '$host', '$school', '$country')");
 
           $stmt = $db->prepare($uploadQuery);
           $stmt->execute();
@@ -77,6 +78,49 @@ include("userinfo.php");
         <input type='time' name='time' placeholder='Event Time' class=''>
         <input type='text' name='location' placeholder='Event Location' class=''>
         <input type='textarea' rows="5" name='description' placeholder='Event Description' class=''>
+
+        <select id='selectCountry' name="country">
+
+          <option value = "" disable selected>Select Country</option>
+
+            <?php
+            $countryDropQuery = "SELECT code, name FROM country";
+            $stmt = $db->prepare($countryDropQuery);
+            $stmt->execute();
+            $stmt -> bind_result($code, $country);
+            $array = array();
+
+
+                    while ($stmt-> fetch()){
+                        ?>
+                    <option value="<?php echo $code;?>"><?php echo $country; ?></option>
+            <?php } ?>
+          </select>
+
+    <?php
+    if (isset($_POST['country'])){?>
+      <select id='selectCity' name="city">
+
+        <option value = "" disable selected>Select City</option>
+
+            <?php
+            $cityDropQuery = "SELECT ID, Name FROM city WHERE CountryCode = '{$code}' ";
+            $stmt = $db->prepare($cityDropQuery);
+            $stmt->execute();
+            $stmt -> bind_result($cityID, $city);
+            $array = array();
+
+
+                    while ($stmt-> fetch()){
+                        ?>
+                    <option value="<?php echo $cityID;?>"><?php echo $city; ?></option>
+            <?php } ?>
+        </select>
+
+  <?php  }
+
+      ?>
+
         <h4>Picture upload</h4>
         <input type="file" name="upload"><br>
 
