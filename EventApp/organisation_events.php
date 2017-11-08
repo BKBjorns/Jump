@@ -36,7 +36,7 @@ include("userinfo.php");
             //get the user ID
             $userid = $_SESSION['userID'];
             $organisation = $_SESSION['organisation'];
-            echo $organisation;
+            //echo $organisation;
             $eventQuery = "SELECT eventID FROM Events WHERE host = '{$organisation}' ";
             $event_stmt = $db->prepare($eventQuery);
             $event_stmt->execute();
@@ -50,7 +50,7 @@ include("userinfo.php");
             $event_stmt->close();
 
 
-            print_r ($array);
+            //print_r ($array);
 
 
         //-----GET EVENTS & DRAW CARDS--------------------------------------------------------------------------------
