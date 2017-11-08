@@ -3,7 +3,8 @@
 
 //-- CHECK IF USER IS LOGGED IN
 session_start();
-    if (!isset($_SESSION['userID'])) {
+//if there is no user session saved, it will redirect to the start page
+if (!isset($_SESSION['userID'])) {
         header("Location:../index.php");
     }
 
@@ -13,8 +14,11 @@ include("admin_menu.php");
 include("../userinfo.php");
 
 //-- DATABASE CONNECTION
+//creates db connection ($db defined in config.php)
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+//checks if there is a db connection existing
 if ($db->connect_error) {
+    //returns why db cannot connect
     echo "could not connect: " . $db->connect_error;
     exit();
 }

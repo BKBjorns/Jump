@@ -1,35 +1,35 @@
 <?php
+//-- PAGE SETUP ----------------------------------------------------------------
 
+//-- CHECK IF USER IS LOGGED IN
 session_start();
     if (!isset($_SESSION['userID'])) {
         header("Location:../index.php");
     }
 
+//-- INCLUDE
 include("admin_header.php");
 include("admin_menu.php");
 include("../userinfo.php");
+
+//-- DATABASE CONNECTION
+@ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+if ($db->connect_error) {
+   echo "could not connect: " . $db->connect_error;
+   header("Location: index.php");
+   exit();
+}
 ?>
 
 
-<?php 
-    
- //creates a new connection to the database - connection specified in config.php
- @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+<?php
 
-//if it cannot connect to the database it will send the user back to the index page
-if ($db->connect_error) {
-    //returns why db cannot connect
-    echo "could not connect: " . $db->connect_error;
-    //takes the user back to the index page
-    header("Location: index.php");
-    exit();
-}
-   
 
-         //Add new student 
+
+         //Add new student
         //checks if all input fields are filled out
         if (isset($_POST['nuFirstname'])){
-            
+
             //gets the input and gets rid of spaces (trim)
             $firstname = trim ($_POST['nuFirstname']);
             $lastname = trim ($_POST['nuLastname']);
@@ -37,8 +37,8 @@ if ($db->connect_error) {
             $pass= trim ($_POST['nuPass']);
             //$passConf= trim ($_POST['nuPassConf']);
             $school= trim ($_POST['school']);
-            
-            
+
+
             //returns input as string with backslashes in front of predefined characters
             $firstname = addslashes ($firstname);
             $lastname = addslashes ($lastname);
@@ -47,22 +47,22 @@ if ($db->connect_error) {
             $pass= addslashes ($pass);
             //$passConf= addslashes ($passConf);
             $school= addslashes ($school);
-            
+
             //takes the password and hashes it
             $userpass= sha1($pass);
-            
-            
+
+
             //get all emails from db
             $mailQuery = "SELECT * FROM Users WHERE email = '{$email}'";
             //echo $mailQuery;
-            $stmt = $db->prepare($mailQuery);           
+            $stmt = $db->prepare($mailQuery);
             $result=mysqli_query($db, $mailQuery);
             $email_nrRows = mysqli_num_rows($result);
-           
-            echo $email_nrRows;
-            
 
-            
+            echo $email_nrRows;
+
+
+
            // check if all fields are filled out
             if (!$firstname || !$lastname || !$email || !$pass || !$school) {
                 echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
@@ -70,7 +70,7 @@ if ($db->connect_error) {
                 echo("<p style='margin-top:150px;'>The email is already taken</p>");
             }
             else{
-            
+
                 if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
 
                      $allowedextensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -110,99 +110,99 @@ if ($db->connect_error) {
                      $stmt->bind_param('ssssss', $userpass, $email, $image, $school, $firstname, $lastname);
                      $stmt->execute();
                     //redirects the user to the login page after data is saved in db
-                     echo "<script>window.location.href='admin_events.php'</script>";  
+                     echo "<script>window.location.href='admin_events.php'</script>";
                      exit;
                     }
 
                   }
-                
+
 //            //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
 //             $stmt = $db->prepare("INSERT INTO Users values ('', 'student', ?, ?, '', ?, ?, ?, '')");
-//            
+//
 //            //binds the parameter
 //             $stmt->bind_param('sssss', $userpass, $email, $school, $firstname, $lastname);
 //             $stmt->execute();
 //            //redirects the user to the login page after data is saved in db
-//             echo "<script>window.location.href='login.php'</script>";  
+//             echo "<script>window.location.href='login.php'</script>";
 //             exit;
             }
 
-        } 
+        }
 
-    
-    
-    
+
+
+
 //if organisation radio button is clicked, runs this statement
-    
+
         //checks if all input fields are filled out
         if (isset($_POST['orgname'])){
-            
+
             //gets the input and gets rid of spaces (trim)
             $orgname = trim ($_POST['orgname']);
             $email = trim ($_POST['nuEmail']);
             $pass= trim ($_POST['nuPass']);
             //$passConf= trim ($_POST['nuPassConf']);
             $school= trim ($_POST['school']);
-            
-            
+
+
             //returns input as string with backslashes in front of predefined characters
             $orgname = addslashes ($orgname);
             $email = addslashes ($email);
             $pass= addslashes ($pass);
             //$passConf= addslashes ($passConf);
             $school= addslashes ($school);
-            
+
             //takes the password and hashes it
             $userpass= sha1($pass);
-            
-            
+
+
             //check if all fields are filled out
             if (!$orgname || !$email || !$pass || !$school) {
                 echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
             }
             else{
-        
+
             //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
              $stmt = $db->prepare("INSERT INTO Users values ('', 'organisation', ?, ?, '', ?, '', '', ?)");
-            
+
             //binds the parameter
              $stmt->bind_param('ssss', $userpass, $email, $school, $orgname);
              $stmt->execute();
             //redirects the user to the login page after data is saved in db
-             echo "<script>window.location.href='admin_events.php'</script>";  
+             echo "<script>window.location.href='admin_events.php'</script>";
              exit;
             }
 
         } ?>
-    
-  
+
+
 <div class='wrapper'>
-    
+
 
     <div class="container">
-        
-        
+
+
 <!-- Select user type , Student or Organization window  -->
- 
+
         <div id='selectUserType'>
             <ul>
-               
+
                     <li>
-                        <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'> 
+                        <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'>
                         <label for="student">Student</label>
                     </li>
 
                     <li>
-                        <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'> 
+                        <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'>
                         <label for="org">Organization</label>
                     </li>
-                
+
             </ul>
-                  
+
         </div>
-        
- 
- <!--     Form for new student      --> 
+
+
+ <!--     Form for new student      -->
         <form action='admin_adduser.php' method="POST" class='newUserForm'>
             <div id='newStudentForm'>
 
@@ -215,7 +215,7 @@ if ($db->connect_error) {
                     <input type='email' name='nuEmail' placeholder='Email' class='inputField'>
 
                     <br>
-                    <input type='password' name='nuPass' placeholder='Password' class='inputField'>              
+                    <input type='password' name='nuPass' placeholder='Password' class='inputField'>
                     <br>
                     <!--<input type='password' name='nuPassConf' value='Password' class='inputField'>-->
 
@@ -237,7 +237,7 @@ if ($db->connect_error) {
 
              </div>
         </form>
-        
+
  <!--    Form for new organization      -->
         <form action='admin.php' method="POST" class='newUserForm'>
             <div id='newOrgForm'>
@@ -275,7 +275,7 @@ if ($db->connect_error) {
         </form>
     </div>
 
-<script src="../js/newuser.js"></script>  
- <?php   
+<script src="../js/newuser.js"></script>
+ <?php
 include("../footer.php");
 ?>
