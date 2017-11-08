@@ -170,11 +170,11 @@ include("userinfo.php");
                     echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
                   ?>
               </div>
-              <a href="#" class="expanderBtn">
+              <button href="#" class="expanderBtn">
                   <i class="fa fa-angle-down" aria-hidden="true"></i>
-              </a>
+              </button>
               <p class="eventDescription">
-                <?php echo "$description";?>
+                <?php echo "$description <br> $host"?>
               </p>
             </div>
        </div>
