@@ -46,8 +46,12 @@ $school=$_SESSION['school'];
       <h4>Picture upload</h4>
       <input type="file" name="upload" value="<?php $imageE ?>"><br>
       <div class="bContainer">
-          <input class="submitEvent" type="submit" value="Save Changes">
-          <a href="admin_events.php" class="backBtn">Go Back</a>
+         <div class="gap">
+              <input class="submitEvent" type="submit" value="Save Changes">
+          </div>
+          <div class="gap">
+              <a href="admin_events.php" class="backBtn">Go Back</a>
+          </div>
        </div>
   </form>
 </div>

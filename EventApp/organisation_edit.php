@@ -56,8 +56,12 @@ include("userinfo.php");
 
 
         <div class="bContainer">
-            <input class="submitEvent" type="submit" value="Save Changes">
-            <a href="organisation_events.php" class="backBtn">Go Back</a>
+           <div class="gap">
+                <input class="submitEvent" type="submit" value="Save Changes">
+            </div>
+            <div class="gap">
+                <a href="organisation_events.php" class="backBtn">Go Back</a>
+            </div>
          </div>
     </form>
 
