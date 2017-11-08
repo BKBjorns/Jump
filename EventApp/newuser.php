@@ -19,29 +19,28 @@ if ($db->connect_error) {
         <a href="index.php"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
     </div>
     <div class="logoLogin">
-    <div class="container">
-        
-        
+      <div class="container">
+
+
 <!-- SELECT USER TYPE ----------------------------------------------------------------------------------------------------->
- 
+
         <div id='selectUserType'>
             <ul>
-               
+
                     <li>
-                        <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'> 
+                        <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'>
                         <label for="student">Student</label>
                     </li>
 
                     <li>
-                        <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'> 
+                        <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'>
                         <label for="org">Organization</label>
                     </li>
-                
+
             </ul>
-                  
-        </div>
-        
-        
+          </div>
+
+
 <!-- STUDENT FORM ---------------------------------------------------------------------------------------------------------->
         <form action='newuser.php' method="POST" class='newUserForm'>
             <div id='newStudentForm'>
@@ -55,21 +54,21 @@ if ($db->connect_error) {
                     <input type='email' name='nuEmail' placeholder='Email' class='inputField'>
 
                     <br>
-                    <input type='password' name='nuPass' placeholder='Password' class='inputField'>              
+                    <input type='password' name='nuPass' placeholder='Password' class='inputField'>
                     <br>
                     <!--                <input type='text' name='nuSchool' value='School' class='inputField'>-->
                     <select id='selectSchool' name="school">
-                    
+
                     <option value = "" disable selected>Select School</option>
 
-                        <?php 
+                        <?php
                         $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
                         $stmt = $db->prepare($schoolDropQuery);
                         $stmt->execute();
                         $stmt -> bind_result($schoolID, $school);
                         $array = array();
-                        
-                        
+
+
                                 while ($stmt-> fetch()){
                                     ?>
                                 <option value="<?php echo $schoolID;?>"><?php echo $school; ?></option>
@@ -83,7 +82,7 @@ if ($db->connect_error) {
 
              </div>
         </form>
-        
+
  <!-- ORGANISATION FORM ----------------------------------------------------------------------------------------------------->
         <form action='newuser.php' method="POST" class='newUserForm'>
             <div id='newOrgForm'>
@@ -105,22 +104,22 @@ if ($db->connect_error) {
                     <select id='selectSchool' name="school">
                         <option value="School" disabled selected>Select School</option>
                         <!-- GET DROPDOWN SCHOOL VALUES ---------------------------------------------------------------------->
-                         <?php 
+                         <?php
                             $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
                             $stmt = $db->prepare($schoolDropQuery);
                             $stmt->execute();
                             $stmt -> bind_result($schoolID, $school);
                             $array = array();
-                        
-                        
+
+
                             while ($stmt-> fetch()){
                                 ?>
                                 <option value="<?php echo $schoolID;?>"><?php echo $school; ?></option>
                         <?php
                             }?>
-                            
+
                     </select>
-                    
+
                     <!-- FILE UPLOAD ----------------------------------------------------------------------------------------->
                     <h4>Picture upload</h4>
                     <input type="file" name="upload" enctype="multipart/form-data">
@@ -129,15 +128,16 @@ if ($db->connect_error) {
             </div>
         </form>
     </div>
+  </div>
 </div>
-    
+
 <script src="js/newuser.js"></script>
 
-<?php 
-    
+<?php
+
 //-- ADD NEW STUDENT ----------------------------------------------------------------------------------------------------------
         if (isset($_POST['nuFirstname'])){
-            
+
             //-- GET DATA FROM INPUT FIELDS -------------------------------------------------------
             //gets the input and gets rid of spaces (trim)
             $firstname = trim ($_POST['nuFirstname']);
@@ -146,8 +146,8 @@ if ($db->connect_error) {
             $pass= trim ($_POST['nuPass']);
             //$passConf= trim ($_POST['nuPassConf']);
             $school= trim ($_POST['school']);
-            
-            
+
+
             //returns input as string with backslashes in front of predefined characters
             $firstname = addslashes ($firstname);
             $lastname = addslashes ($lastname);
@@ -156,25 +156,25 @@ if ($db->connect_error) {
             $pass= addslashes ($pass);
             //$passConf= addslashes ($passConf);
             $school= addslashes ($school);
-            
-            
+
+
             //-- SHA PASSWORD -------------------------------------------------------------------------
             //takes the password and hashes it
             $userpass= sha1($pass);
-            
-            
+
+
             //-- CHECK IF USER ALREADY EXISTS ---------------------------------------------------------
             //get all emails from db
             $mailQuery = "SELECT * FROM Users WHERE email = '{$email}'";
             //echo $mailQuery;
-            $stmt = $db->prepare($mailQuery);           
+            $stmt = $db->prepare($mailQuery);
             $result=mysqli_query($db, $mailQuery);
             $email_nrRows = mysqli_num_rows($result);
-           
-            //echo $email_nrRows;
-            
 
-            
+            //echo $email_nrRows;
+
+
+
             //-- CHECK IF ALL FIELDS ARE FILLED OUT ----------------------------------------------------
             if (!$firstname || !$lastname || !$email || !$pass || !$school) {
                 echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
@@ -188,7 +188,7 @@ if ($db->connect_error) {
                      $allowedextensions = array('jpg', 'jpeg', 'gif', 'png');
                      $extension = strtolower(substr($_FILES['upload']['name'], strrpos($_FILES['upload']['name'], '.') + 1));
                      $error = array ();
-                    
+
                     //ERROR FILE FORMAT
                      if(in_array($extension, $allowedextensions) === false){
 
@@ -196,7 +196,7 @@ if ($db->connect_error) {
                         $error[] = 'This is not an image, upload is allowed only for images.';
                          echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
                     }
-                    
+
                     //ERROR SIZE
                     if($_FILES['upload']['size'] > 1000000){
                       $error[]='The file exceeded the upload limit';
@@ -216,21 +216,21 @@ if ($db->connect_error) {
                         $stmt->bind_param('ssssss', $userpass, $email, $image, $school, $firstname, $lastname);
                         $stmt->execute();
                         //redirects the user to the login page after data is saved in db
-                        echo "<script>window.location.href='login.php'</script>";  
+                        echo "<script>window.location.href='login.php'</script>";
                         exit();
                     }
 
                   }
             }
 
-        } 
+        }
 
-    
-    
-    
+
+
+
 //-- ADD NEW STUDENT ----------------------------------------------------------------------------------------------------------
         if (isset($_POST['orgname'])){
-            
+
             //-- GET DATA FROM INPUT FIELDS -------------------------------------------------------
             //gets the input and gets rid of spaces (trim)
             $orgname = trim ($_POST['orgname']);
@@ -238,37 +238,37 @@ if ($db->connect_error) {
             $pass= trim ($_POST['nuPass']);
             //$passConf= trim ($_POST['nuPassConf']);
             $school= trim ($_POST['school']);
-            
-            
+
+
             //returns input as string with backslashes in front of predefined characters
             $orgname = addslashes ($orgname);
             $email = addslashes ($email);
             $pass= addslashes ($pass);
             //$passConf= addslashes ($passConf);
             $school= addslashes ($school);
-            
-            
+
+
             //-- SHA PASSWORD -------------------------------------------------------------------------
             //takes the password and hashes it
             $userpass= sha1($pass);
-            
-            
+
+
             //-- CHECK IF ORGANISATION ALREADY EXISTS -------------------------------------------------
             //get all emails from db
             $mailQuery = "SELECT * FROM Users WHERE email = '{$email}'";
             //echo $mailQuery;
-            $stmt = $db->prepare($mailQuery);           
+            $stmt = $db->prepare($mailQuery);
             $result=mysqli_query($db, $mailQuery);
             $email_nrRows = mysqli_num_rows($result);
-            
+
             $hostQuery = "SELECT * FROM Users WHERE organisation = '{$orgname}'";
             //echo $hostQuery;
-            $stmt = $db->prepare($hostQuery);           
+            $stmt = $db->prepare($hostQuery);
             $resultHost = mysqli_query($db, $hostQuery);
             $host_nrRows = mysqli_num_rows($resultHost);
-           
+
             //echo $email_nrRows;
-            
+
             //-- CHECK IF ALL FIELDS ARE FILLED OUT ----------------------------------------------------
             //check if all fields are filled out
             if (!$orgname || !$email || !$pass || !$school) {
@@ -278,21 +278,21 @@ if ($db->connect_error) {
             }else if($host_nrRows != 0){
                 echo("<p style='margin-top:150px;'>There is already an account for this organisation</p>");
             }else{
-        
+
             //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
              $stmt = $db->prepare("INSERT INTO Users values ('', 'organisation', ?, ?, '', ?, '', '', ?)");
-            
+
             //binds the parameter
              $stmt->bind_param('ssss', $userpass, $email, $school, $orgname);
              $stmt->execute();
             //redirects the user to the login page after data is saved in db
-             echo "<script>window.location.href='login.php'</script>";  
+             echo "<script>window.location.href='login.php'</script>";
              exit;
             }
 
-        } 
-    
-    
-    
+        }
+
+
+
 include("footer.php");
 ?>
