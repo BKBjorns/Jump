@@ -1,70 +1,47 @@
 <?php
+//-- PAGE SETUP ----------------------------------------------------------------
+session_start();
+//-- INCLUDE
 include("header.php");
+
+//-- DATABASE CONNECTION
+@ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+if ($db->connect_error) {
+   echo "could not connect: " . $db->connect_error;
+   header("Location: index.php");
+   exit();
+}
 ?>
-    <div id="top" class="logo">
-        <a href="index.php"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
-    </div>
-    <div class="allEvents">
-      <?php
-        session_start();
-        @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 
-        if ($db->connect_error) {
-            echo "could not connect: " . $db->connect_error;
-            exit();
-        }
+<!-- HEADER AREA -------------------------------------------------------------->
+<div id="top" class="logo">
+    <a href="index.php"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+</div>
 
+<!-- EVENT CARDS -------------------------------------------------------------->
+<div class="allEvents">
+<?php
+    //-- DELETE PASSED EVENTS --------------------------------------------------
+    $current_time = date("Y/m/d");
 
-        //add attendee
-        //check if plus button is clicked
-//         if (isset($_POST['plus'])){
-//
-//             //set variables, which get data
-//             $eventid = $_POST['eventID'];
-//             $userid = $_SESSION['userID'];
-//
-//             //get the eventID from the input and the userID from the session and insert it into the database
-//             $insertQuery = "INSERT INTO Attend (eventID, userID) VALUES ($eventid, $userid)";
-//
-//             //this selects the userID and eventID from the attend db to check if the current user already has attended that event > not supposed to be able to click the same event twice
-//             $stmt = $db->prepare("SELECT `eventID`, `userID` FROM `Attend` WHERE userID = $userid  AND eventID = $eventid");
-//             $stmt->execute();
-//
-//             //if the event hasnt been clicked/attended before, there will no rows in the db, which means that the fetch will be empty
-//             if (!$stmt->fetch()){
-//                // then the userID and eventID will be added in the attend db
-//                $stmt = $db->prepare($insertQuery);
-//                $stmt->execute();
-//                header("location:events.php");
-//             }
-//         }
+    $stmt = $db->prepare("DELETE FROM Events WHERE startdate < '$current_time'");
+    $stmt->execute();
 
 
-        // To delete events if the date is past.
-        $current_time = date("Y/m/d");
+    //-- GET EVENT DATA --------------------------------------------------------
+    $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate, time";
+    $stmt = $db->prepare($query);
+    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
+    $stmt->execute();
 
-        $stmt = $db->prepare("DELETE FROM Events WHERE startdate < '$current_time'");
-        $stmt->execute();
+    //- draw cards
+    while($stmt->fetch()){ ?>
 
-
-        //this selects all event information from the Events db
-        $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate, time";
-        $stmt = $db->prepare($query);
-        //binds the db information to the variables
-        $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
-        $stmt->execute();
-
-        //gets every event in a row and displays the information in the div "eventContainer"
-        while($stmt->fetch()){ ?>
-
-       <!---------------------------------EVENT ONE-->
        <div class="eventContainerOne">
-          <!-----------event img & attend event btn-->
           <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
           <form method="POST" action='events.php'>
                   <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
-              </form>
-          <!---------event information & expand btn-->
+          </form>
           <div class="infoContainer">
               <div class="eventTitle">
                  <?php
@@ -79,15 +56,10 @@ include("header.php");
                    echo "$description <br> $host";
                  ?>
               </p>
-            </div>
+          </div>
        </div>
-
-       <?php  } ?>
-
-
-
-
-    </div>
+   <?php  } ?>
+</div>
 
 
 
