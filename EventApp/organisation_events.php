@@ -49,10 +49,6 @@ include("userinfo.php");
             }
             $event_stmt->close();
 
-            // $array2 = array();
-            // $array2[] = array(44);
-            //
-            // print_r ($array2);
 
             print_r ($array);
 
@@ -72,11 +68,15 @@ include("userinfo.php");
                     <div class="eventContainerOne">
                         <!----------------------------------------event img-->
                         <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
-                        <!---------------------------------------attend Bnt-->
-                        <form method="POST" action='events.php'>
-                              <input type="submit" value="-" class="plusBtn" name="minus">
+                        <!---------------------------------------edit Bnt-->
+                        <?php
+                          echo '<a class="editBtn" href="organisation_edit.php?eventID=' . urlencode($eventID) . '">
+                               <i class="fa fa-pencil" aria-hidden="true"></i></a>';
+                          ?>
+                        <!-- <form method="POST" action='events.php'>
+                              <input type="submit" value="-" class="plusBtn" name="edit">
                               <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
-                          </form>
+                          </form> -->
                         <!--------------------------------event information-->
                         <div class="infoContainer">
                           <p class="eventTitle">
@@ -106,10 +106,10 @@ include("userinfo.php");
                         <!----------------------------------------event img-->
                         <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
                         <!---------------------------------------attend Bnt-->
-                        <form method="POST" action='events.php'>
+                        <!-- <form method="POST" action='events.php'>
                               <input type="submit" value="+" class="plusBtn" name="plus">
                               <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
-                          </form>
+                          </form> -->
                         <!--------------------------------event information-->
                         <div class="infoContainer">
                           <p class="eventTitle">
