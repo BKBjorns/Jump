@@ -75,7 +75,6 @@ session_start();
 //Makes unable to write html code into the search fields
   $shTitle = htmlentities($shTitle);
 
-
   $shTitle = addslashes($shTitle);
 
 $query = "";
@@ -114,8 +113,9 @@ $query = "";
 
 
     $stmt = $db->prepare($query);
-    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
+    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $country);
     $stmt->execute();
+
 
 // When there is no search result
     $stmt->store_result();
@@ -123,6 +123,11 @@ $query = "";
 
     if($noresult === 0){
       echo "Your search did not return any results";
+    }{
+
+
+
+
     }
 
 
