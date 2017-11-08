@@ -7,18 +7,20 @@ if (!isset($_SESSION['userID'])) {
 
 include("admin_header.php");
 include("admin_menu.php");
-//include("../userinfo.php");
+include("../userinfo.php");
+
+$school=$_SESSION['school'];
 
 ?>
 
 
-    <div class="userInfo">
+    <!-- <div class="userInfo">
         <div class="adminImg"></div>
         <div class="userWelcome">Hi <?php
             //session_start();
-            echo $_SESSION['username'];
+            //echo $_SESSION['username'];
             ?>! These are your events</div>
-    </div>
+    </div> -->
     <div class="addEvent">
 
     <?php
@@ -34,26 +36,30 @@ include("admin_menu.php");
 
         $eventid = trim($_GET['eventID']);
 //        $eventid = 39;
-        echo "$eventid";
+//        echo "$eventid";
 
-        $getQuery = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link FROM Events WHERE eventID = {$eventid}";
-        echo $getQuery;
+        $getQuery = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events WHERE eventID = {$eventid}";
+        //echo $getQuery;
         $stmt = $db->prepare($getQuery);
+
+        $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $imageE, $link, $host);
         $stmt->execute();
-        $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link);
 
+        //echo $title, $description, $startdate, $enddate, $time, $price, $location, $imagee, $link, $host;
+        while ($stmt->fetch()) {
+        //echo $eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $imageE, $link, $host;
 
-        echo $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link;
+     }
         ?>
 
-    <form class="addeventForm" enctype="multipart/form-data" action="admin_add.php" method="POST">
+    <form class="addeventForm" enctype="multipart/form-data" action="" method="POST">
         <input type='text' name='title' value='<?php echo "$title" ?>' class=''>
         <input type='date' name='date' value='<?php echo $startdate ?>' class=''>
         <input type='time' name='time' value='<?php echo $time ?>' class=''>
-        <input type='text' name='location' value='<?php echo $image ?>' class=''>
+        <input type='text' name='location' value='<?php echo $location ?>' class=''>
         <input type='textarea' rows="5" name='description' value='<?php echo $description ?>' class=''>
         <h4>Picture upload</h4>
-        <input type="file" name="upload" value="<?php $image ?>"><br>
+        <input type="file" name="upload" value="<?php $imageE ?>"><br>
 
 
         <div class="bContainer">
@@ -85,8 +91,8 @@ if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
          if(in_array($extension, $allowedextensions) === false){
 
             #add a new array entry
-            $error[] = 'This is not an image, upload is allowed only for images.';
-             echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
+            $error[] = 'Please upload an image with allowed extension. Images only.';
+             echo("<p style='color:'black';>This is not an image, upload is allowed only for images.</p>");
         }
 
         if($_FILES['upload']['size'] > 1000000){

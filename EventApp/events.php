@@ -76,16 +76,16 @@ $type = $_SESSION['type'];
     $array = array();
 
     while($attend_stmt->fetch()){
-        $array[] = array($eventID);
+        $array[] = $eventID;
     }
     $attend_stmt->close();
 
-    $array2 = array();
-    $array2[] = array(44);
+    // $array2 = array();
+    // $array2[] = array(44);
+    //
+    // print_r ($array2);
 
-    print_r ($array2);
-
-    //print_r ($array);
+    print_r ($array);
 
 
 //-----GET EVENTS & DRAW CARDS--------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ $type = $_SESSION['type'];
 
     while($stmt->fetch()){
         if ((in_array ($eventID, $array))){
-              echo $eventID; ?>
+              //echo $eventID; ?>
             <div class="eventContainerOne">
                 <!----------------------------------------event img-->
                 <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
