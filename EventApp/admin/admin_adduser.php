@@ -127,11 +127,26 @@ if (isset($_POST['orgname'])){
     $orgname = addslashes ($orgname);
     $email = addslashes ($email);
     $pass= addslashes ($pass);
-    //$passConf= htmlentities ($passConf);
+
 
 
     $userpass= sha1($pass);
 
+    //-- CHECK IF ORGANISATION ALREADY EXISTS ----------------------------------
+    //get all emails from db
+    $mailQuery = "SELECT * FROM Users WHERE email = '{$email}'";
+    //echo $mailQuery;
+    $stmt = $db->prepare($mailQuery);
+    $result=mysqli_query($db, $mailQuery);
+    $email_nrRows = mysqli_num_rows($result);
+
+    $hostQuery = "SELECT * FROM Users WHERE organisation = '{$orgname}'";
+    //echo $hostQuery;
+    $stmt = $db->prepare($hostQuery);
+    $resultHost = mysqli_query($db, $hostQuery);
+    $host_nrRows = mysqli_num_rows($resultHost);
+
+    //echo $email_nrRows;
 
     if (!$orgname || !$email || !$pass || !$school) {
       echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
