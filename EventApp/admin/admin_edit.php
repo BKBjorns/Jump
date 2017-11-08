@@ -14,13 +14,6 @@ $school=$_SESSION['school'];
 ?>
 
 
-    <!-- <div class="userInfo">
-        <div class="adminImg"></div>
-        <div class="userWelcome">Hi <?php
-            //session_start();
-            //echo $_SESSION['username'];
-            ?>! These are your events</div>
-    </div> -->
     <div class="addEvent">
 
     <?php
@@ -75,14 +68,30 @@ $school=$_SESSION['school'];
     //-----UPDATE EVENT  ------------------------------------------------------------------------------------------------
 if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
 
-        $title = $_POST['title'];
-        $date = $_POST['date'];
-        $time = $_POST['time'];
-        $location = $_POST['location'];
-        $description = $_POST['description'];
+        $title = trim ($_POST['title']);
+        $date = trim ($_POST['date']);
+        $time = trim ($_POST['time']);
+        $location = trim ($_POST['location']);
+        $description = trim ($_POST['description']);
 
-        // echo "$title, $location, $description";
-        // exit();
+
+
+        //-- XSS -----------------------------------------------------------------------------------------------------
+        $title = htmlentities($title);
+        $date = htmlentities($date);
+        $time = htmlentities($time);
+        $location = htmlentities($location);
+        $description = htmlentities($description);
+
+
+        $security = mysqli_real_escape_string($db, $title, $date, $time, $location, $description);
+
+        $title = addslashes($title);
+        $date = addslashes($date);
+        $time = addslashes($time);
+        $location = addslashes($location);
+        $description = addslashes($description);
+
 
          $allowedextensions = array('jpg', 'jpeg', 'gif', 'png');
          $extension = strtolower(substr($_FILES['upload']['name'], strrpos($_FILES['upload']['name'], '.') + 1));
