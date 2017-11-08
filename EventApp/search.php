@@ -20,7 +20,6 @@ session_start();
 ?>
 
 <div class="search" action="">
-  <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
   <form class="searchForm" action="search.php" method="POST">
     <input type="text" name="shTitle" placeholder="Keyword"><br>
     <input type="date" name="shDate" class="shDate"><br>
@@ -136,10 +135,7 @@ $query = "";
     <div class="eventContainerOne">
        <!-----------event img & attend event btn-->
        <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
-       <form method="POST" action=''>
-               <input type="submit" value="+" class="plusBtn" name="plus">
-               <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
-           </form>
+
        <!---------event information & expand btn-->
        <div class="infoContainer">
            <div class="eventTitle">
@@ -149,11 +145,13 @@ $query = "";
 
            </div>
 
-           <a href="#" class="expanderBtn">
+           <button href="#" class="expanderBtn">
                <i class="fa fa-angle-down" aria-hidden="true"></i>
-           </a>
+           </button>
            <p class="eventDescription">
-             <?php echo "$description $host";?>
+             <?php
+                echo "$description <br> $host";
+              ?>
            </p>
       </div>
     </div>
