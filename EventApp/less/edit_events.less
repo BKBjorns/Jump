@@ -7,16 +7,16 @@ div.allEvents{
     padding: 10px;
     box-sizing: border-box;
     margin-top: 60px;
-    
+
     div.eventContainer, div.eventContainerFirst, div.eventContainerOne{
         width: 100%;
         box-shadow: 0px 0.5px 1px @color-grey;
         border-radius: 2px;
         margin-top: 20px;
         position: relative;
-        
+
         div.imgContainer{
-            
+
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
@@ -24,13 +24,13 @@ div.allEvents{
             height: 110px;
             border-radius: 2px 2px 0 0;
         }
-        
-        a.editBtn{
+
+        a.editBtn, a.orgEditBtn{
             position: absolute;
             top: 15px;
             right: 10px;
             width: 20px;
-            height: 20px;            
+            height: 20px;
             background: @color-transparent;
             border: solid 0.4px @color-grey;
             border-radius: 10px;
@@ -38,21 +38,24 @@ div.allEvents{
             font-weight: 300;
             font-family: @font-base;
             color: @color-grey;
-            
+
             .fa.fa-pencil{
                 font-size: 10pt;
                 margin: 3px 0px 0px 4px;
             }
         }
-        
+        a.orgEditBtn{
+          top: 50px !important;
+        }
+
         form{
             position: absolute;
             top: 15px;
             right: 10px;
-            
+
             input.plusBtn, input.editBtn{
                  width: 20px;
-                 height: 20px;            
+                 height: 20px;
                  background: @color-transparent;
                  border: solid 0.4px @color-grey;
                  border-radius: 10px;
@@ -62,10 +65,10 @@ div.allEvents{
                  color: @color-grey;
             }
         }
-        
+
         div.infoContainer{
             overflow: hidden;
-            
+
             p.eventTitle{
                font-weight: 400;
                margin-top: 20px;
@@ -81,7 +84,7 @@ div.allEvents{
                 padding-left: 10px;
             }
             }
-            
+
             a{
                 margin: -22px 10px 10px;
                 float: right;
@@ -89,19 +92,19 @@ div.allEvents{
                 height: 19px;
                 background: none;
                 border: solid 0.4px @color-grey;
-                border-radius: 10px;                    
+                border-radius: 10px;
                 box-shadow: 0px 0.5px 0.5px @color-grey;
                 text-align: center;
                 vertical-align: middle;
                 align-content: center;
-            
+
                 i.fa.fa-angle-down{
                     color: @color-grey;
                     padding: 3px;
                     font-weight: 100;
                 }
             }
-            
+
             p.eventDescription{
                 margin: 10px 0;
                 padding-top: 10px;
@@ -116,9 +119,3 @@ div.allEvents{
         }
     }
 }
-
-
-
-
-
-

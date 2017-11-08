@@ -32,6 +32,16 @@ if ($db->connect_error) {
       $stmt->execute();
 
 
+      //-- DELETE EVENT ----------------------------------------------------------
+      if (isset($_POST['minus'])){
+          $eventid = $_POST['eventID'];
+
+          $deleteQuery = "DELETE FROM Events WHERE eventID = '{$eventid}'";
+          $stmt = $db->prepare($deleteQuery);
+          $stmt->execute();
+      }
+
+
       //-----GET EVENTS FROM ORGANISATION (TABLE EVENTS)------------------------
       $userid = $_SESSION['userID'];
       $organisation = $_SESSION['organisation'];
@@ -63,8 +73,12 @@ if ($db->connect_error) {
           if ((in_array ($eventID, $array))){ ?>
               <div class="eventContainerOne">
                   <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
+                  <form method="POST" action=''>
+                      <input type="submit" value="—" class="plusBtn" name="minus">
+                      <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
+                  </form>
                   <?php
-                    echo '<a class="editBtn" href="organisation_edit.php?eventID=' . urlencode($eventID) . '">
+                    echo '<a class="orgEditBtn" href="organisation_edit.php?eventID=' . urlencode($eventID) . '">
                          <i class="fa fa-pencil" aria-hidden="true"></i></a>';
                     ?>
                   <div class="infoContainer">

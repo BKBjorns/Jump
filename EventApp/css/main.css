@@ -741,7 +741,10 @@ div.allEvents div.eventContainerOne div.imgContainer {
 }
 div.allEvents div.eventContainer a.editBtn,
 div.allEvents div.eventContainerFirst a.editBtn,
-div.allEvents div.eventContainerOne a.editBtn {
+div.allEvents div.eventContainerOne a.editBtn,
+div.allEvents div.eventContainer a.orgEditBtn,
+div.allEvents div.eventContainerFirst a.orgEditBtn,
+div.allEvents div.eventContainerOne a.orgEditBtn {
   position: absolute;
   top: 15px;
   right: 10px;
@@ -757,9 +760,17 @@ div.allEvents div.eventContainerOne a.editBtn {
 }
 div.allEvents div.eventContainer a.editBtn .fa.fa-pencil,
 div.allEvents div.eventContainerFirst a.editBtn .fa.fa-pencil,
-div.allEvents div.eventContainerOne a.editBtn .fa.fa-pencil {
+div.allEvents div.eventContainerOne a.editBtn .fa.fa-pencil,
+div.allEvents div.eventContainer a.orgEditBtn .fa.fa-pencil,
+div.allEvents div.eventContainerFirst a.orgEditBtn .fa.fa-pencil,
+div.allEvents div.eventContainerOne a.orgEditBtn .fa.fa-pencil {
   font-size: 10pt;
   margin: 3px 0px 0px 4px;
+}
+div.allEvents div.eventContainer a.orgEditBtn,
+div.allEvents div.eventContainerFirst a.orgEditBtn,
+div.allEvents div.eventContainerOne a.orgEditBtn {
+  top: 50px !important;
 }
 div.allEvents div.eventContainer form,
 div.allEvents div.eventContainerFirst form,
