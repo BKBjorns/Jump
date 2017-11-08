@@ -12,7 +12,13 @@ if ($db->connect_error) {
     header("Location: index.php");
     exit();
 }
+
+
+
+
 ?>
+
+
 
 <div class='wrapper'>
     <div id="back">
@@ -138,7 +144,7 @@ if ($db->connect_error) {
 //-- ADD NEW STUDENT ----------------------------------------------------------------------------------------------------------
         if (isset($_POST['nuFirstname'])){
 
-            //-- GET DATA FROM INPUT FIELDS -------------------------------------------------------
+            //-- GET DATA FROM INPUT FIELDS -----------------------------------------------------------------------------------
             //gets the input and gets rid of spaces (trim)
             $firstname = trim ($_POST['nuFirstname']);
             $lastname = trim ($_POST['nuLastname']);
@@ -146,6 +152,17 @@ if ($db->connect_error) {
             $pass= trim ($_POST['nuPass']);
             //$passConf= trim ($_POST['nuPassConf']);
             $school= trim ($_POST['school']);
+
+
+            // //-- XSS -------------------------------------------------------------------------------------
+            // $firstname = htmlentities($firstname);
+            // $lastname = htmlentities($lastname);
+            // $email = htmlentities($email);
+            // $pass = htmlentities($pass);
+            // $school = htmlentities($school);
+            //
+            // $security = mysqli_real_escape_string($db, $firstname, $lastname, $email, $pass, $school);
+
 
 
             //returns input as string with backslashes in front of predefined characters
