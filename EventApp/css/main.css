@@ -232,6 +232,19 @@ div.allEvents div.eventContainerOne div.infoContainer p.eventTitle {
   float: left;
   padding: 0 10px;
 }
+div.allEvents div.eventContainer div.infoContainer p.eventTitle h4,
+div.allEvents div.eventContainerFirst div.infoContainer p.eventTitle h4,
+div.allEvents div.eventContainerOne div.infoContainer p.eventTitle h4 {
+  font-family: 'Roboto', sans-serif;
+  margin: 7px 0 2px;
+  padding-left: 10px;
+  color: #87d7e2;
+}
+div.allEvents div.eventContainer div.infoContainer p.eventTitle p,
+div.allEvents div.eventContainerFirst div.infoContainer p.eventTitle p,
+div.allEvents div.eventContainerOne div.infoContainer p.eventTitle p {
+  padding-left: 10px;
+}
 div.allEvents div.eventContainer div.infoContainer button.expanderBtn,
 div.allEvents div.eventContainerFirst div.infoContainer button.expanderBtn,
 div.allEvents div.eventContainerOne div.infoContainer button.expanderBtn {
@@ -310,6 +323,15 @@ input.minusBtn:after {
   left: 0;
   z-index: 2;
   color: #a9a9a9;
+}
+p.eventTitle h4 {
+  font-family: 'Roboto', sans-serif;
+  margin: 7px 0 2px;
+  padding-left: 10px;
+  color: #87d7e2;
+}
+p.eventTitle p {
+  padding-left: 10px;
 }
 div.addEvent {
   margin-top: 150px;
@@ -714,7 +736,7 @@ div.allEvents div.eventContainerOne div.imgContainer {
   background-repeat: no-repeat;
   background-position: center center;
   width: 100%;
-  height: 100px;
+  height: 110px;
   border-radius: 2px 2px 0 0;
 }
 div.allEvents div.eventContainer a.editBtn,
@@ -775,6 +797,19 @@ div.allEvents div.eventContainerOne div.infoContainer p.eventTitle {
   float: left;
   padding: 0 10px;
 }
+div.allEvents div.eventContainer div.infoContainer p.eventTitle h4,
+div.allEvents div.eventContainerFirst div.infoContainer p.eventTitle h4,
+div.allEvents div.eventContainerOne div.infoContainer p.eventTitle h4 {
+  font-family: 'Roboto', sans-serif;
+  margin: 7px 0 2px;
+  padding-left: 10px;
+  color: #87d7e2;
+}
+div.allEvents div.eventContainer div.infoContainer p.eventTitle p,
+div.allEvents div.eventContainerFirst div.infoContainer p.eventTitle p,
+div.allEvents div.eventContainerOne div.infoContainer p.eventTitle p {
+  padding-left: 10px;
+}
 div.allEvents div.eventContainer div.infoContainer a,
 div.allEvents div.eventContainerFirst div.infoContainer a,
 div.allEvents div.eventContainerOne div.infoContainer a {
@@ -800,8 +835,15 @@ div.allEvents div.eventContainerOne div.infoContainer a i.fa.fa-angle-down {
 div.allEvents div.eventContainer div.infoContainer p.eventDescription,
 div.allEvents div.eventContainerFirst div.infoContainer p.eventDescription,
 div.allEvents div.eventContainerOne div.infoContainer p.eventDescription {
-  margin-top: 40px;
+  margin: 10px 0;
+  padding-top: 10px;
   clear: left;
-  padding: 0 10px 20px 10px;
+  padding: 10px;
   display: none;
+  border-top: solid 0.4px #a9a9a9;
+}
+div.allEvents div.eventContainer div.infoContainer p.eventDescription .show,
+div.allEvents div.eventContainerFirst div.infoContainer p.eventDescription .show,
+div.allEvents div.eventContainerOne div.infoContainer p.eventDescription .show {
+  padding-top: 10px;
 }
