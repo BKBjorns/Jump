@@ -1,29 +1,32 @@
 <?php
-//-- SESSION HIJACKING PART ONE--------------------------------------------------------------------------
+//-- SESSION HIJACKING PART ONE-------------------------------------------------
 ini_set('session.cookie_httponly', true);
-session_start();
-ob_start();
 
-//-------------------------------------------------------------------------------------------------------
+ob_start();
+// session_start();
+// if (!isset($_SESSION['userID'])) {
+//     header("Location:../index.php");
+// }
+
+//-- INCLUDE
 include("header.php");
 
-//connecting the a new database, which is still Jump defined in config.php
+//-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
-
-//check if there is a connection to the database
 if ($db->connect_error) {
-  echo "could not connect: " . $db->connect_error;
-  exit();
+   echo "could not connect: " . $db->connect_error;
+   header("Location: index.php");
+   exit();
 }
 
-//-- SESSION HIJACKING PART TWO--------------------------------------------------------------------------
+//-- SESSION HIJACKING PART TWO-------------------------------------------------
 
-//if there is no session with the userip saved, create a session that stores the user's IP address
+//-- if there is no session with the userip saved, create a session that stores the user's IP address
 if(isset($_SESSION['userip']) === false){
   $_SESSION['userip'] = $_SERVER['REMOTE_ADDR'];
 }
 
-//if the userip in the session is not the same as the ip address used, destroy session
+//-- if the userip in the session is not the same as the ip address used, destroy session
 if($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']){
   session_unset();
   session_destroy();
@@ -31,12 +34,7 @@ if($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']){
 
 
 
-
-
-
-
-
-//-- IF SESSION ALREADY EXISTS,CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE--------------------------
+//-- IF SESSION ALREADY EXISTS,CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE---
 
 if (isset($_SESSION['userID'])) {
 
@@ -55,15 +53,13 @@ if (isset($_SESSION['userID'])) {
 }
 
 
-//-- CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE---------------------------------------------------
+//-- IF NO SESSION: CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE--------------
 
 if(isset($_POST['email'], $_POST['password'])){
 
-    //-- SQL INJECTION ------------------------------------------------------------------------------
+    //-- SQL INJECTION ---------------------------------------------------------
     $usermail = mysqli_real_escape_string($db, $_POST['email']);
 
-
-    //stripslashes removes backslashes that mitgh have been added before using the function "addslashes"
    	$usermail =  stripslashes($_POST['email']);
     $password =  stripslashes($_POST['password']);
 
@@ -73,9 +69,9 @@ if(isset($_POST['email'], $_POST['password'])){
     $stmt->bind_result($userID, $type, $firstname, $usermail, $userpass, $organisation, $school);
 
     while ($stmt->fetch()) {
-        // check if the hashed password is the same as the password in the database
+        //-- check if the hashed password is the same as the password in the database
         if (sha1($password) == $userpass){
-            // create sessions
+            //-- create sessions
             $_SESSION['username'] = $firstname;
             $_SESSION['userID'] = $userID;
             $_SESSION['usermail'] = $usermail;
@@ -83,7 +79,7 @@ if(isset($_POST['email'], $_POST['password'])){
             $_SESSION['type'] = $type;
             $_SESSION['school'] = $school;
 
-            //check user type to redirect to according page
+            //-- check user type to redirect to according page
             if($type == 'organisation'){
              header("location:organisation.php");
              exit();
@@ -96,13 +92,13 @@ if(isset($_POST['email'], $_POST['password'])){
              header("location:admin/admin.php");
              exit();
             }
-    //if password is not correct, error message
+    //-- if password is not correct, error message
 		} else {echo'<p>Wrong Password</p>';}
   }
 }
 ?>
 
-<!-- LOGIN FORM --------------------------------------------------------------------------->
+<!-- LOGIN FORM --------------------------------------------------------------->
 <div class='wrapper'>
     <div id="back">
         <a href="index.php"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
