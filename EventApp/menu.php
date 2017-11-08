@@ -6,7 +6,8 @@
     $type = $_SESSION['type'];
     //echo $type;
 
-
+//-- CHECK USER TYPE -----------------------------------------------------------
+//--STUDENT MENU
 if ( $type == 'student'){?>
     <header>
             <div id="logo" class="logo"></div>
@@ -23,6 +24,7 @@ if ( $type == 'student'){?>
             </ul>
     </header>
  <?php
+ //-- ORGANISATION MENU
 } else if($type == 'organisation'){?>
     <header>
         <div id="logo" class="logo"></div>

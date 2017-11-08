@@ -1,22 +1,20 @@
 <?php
-//-- SESSION HIJACKING PART ONE--------------------------------------------------------------------------
+//-- SESSION HIJACKING PART ONE-------------------------------------------------
 ini_set('session.cookie_httponly', true);
 session_start();
 ob_start();
 
-//-------------------------------------------------------------------------------------------------------
+
 include("header.php");
 
-//connecting the a new database, which is still Jump defined in config.php
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 
-//check if there is a connection to the database
 if ($db->connect_error) {
   echo "could not connect: " . $db->connect_error;
   exit();
 }
 
-//-- SESSION HIJACKING PART TWO--------------------------------------------------------------------------
+//-- SESSION HIJACKING PART TWO-------------------------------------------------
 
 //if there is no session with the userip saved, create a session that stores the user's IP address
 if(isset($_SESSION['userip']) === false){
@@ -32,11 +30,7 @@ if($_SESSION['userip'] !== $_SERVER['REMOTE_ADDR']){
 
 
 
-
-
-
-
-//-- IF SESSION ALREADY EXISTS,CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE--------------------------
+//-- IF SESSION ALREADY EXISTS,CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE---
 
 if (isset($_SESSION['userID'])) {
 
@@ -55,11 +49,11 @@ if (isset($_SESSION['userID'])) {
 }
 
 
-//-- CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE---------------------------------------------------
+//-- CHECK USER TYPE AND REDIRECT TO ACCORDING PAGE-----------------------------
 
 if(isset($_POST['email'], $_POST['password'])){
 
-    //-- SQL INJECTION ------------------------------------------------------------------------------
+    //-- SQL INJECTION ---------------------------------------------------------
     $usermail = mysqli_real_escape_string($db, $_POST['email']);
 
 
@@ -102,7 +96,7 @@ if(isset($_POST['email'], $_POST['password'])){
 }
 ?>
 
-<!-- LOGIN FORM --------------------------------------------------------------------------->
+<!-- LOGIN FORM --------------------------------------------------------------->
 <div class='wrapper'>
     <div id="back">
         <a href="index.php"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
