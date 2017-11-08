@@ -1,53 +1,49 @@
 <?php
+//-- PAGE SETUP ----------------------------------------------------------------
+
+//-- CHECK IF USER IS LOGGED IN
 session_start();
     if (!isset($_SESSION['userID'])) {
         header("Location:../index.php");
     }
 
+//-- INCLUDE
 include("admin_header.php");
 include("admin_menu.php");
 include("../userinfo.php");
-?>
 
-
-<?php
-
-
+//-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
-
 if ($db->connect_error) {
-  echo "could not connect: " . $db->connect_error;
-  exit();
+   echo "could not connect: " . $db->connect_error;
+   header("Location: index.php");
+   exit();
 }
 
-//This deletes the user
+
+//-- DELETE USER ---------------------------------------------------------------
 if(isset($_POST['minus'])){
-
     $userID = $_POST['userID'];
-
     $deleteQuery = "DELETE FROM Users WHERE userID = '{$userID}'";
-//    echo "$deleteQuery";
-//    exit();
     $stmt = $db->prepare($deleteQuery);
     $stmt->execute();
     //header("location:admin_deleteuser.php");
 }
 
-
+//-- GET USER DATA -------------------------------------------------------------
 $query="SELECT userID, type, userpass, email, image, school, firstname, lastname, organisation FROM Users";
 $stmt = $db->prepare($query);
 $stmt->bind_result($userID, $type, $userpass, $email, $image, $school, $firstname, $lastname, $organisation);
 $stmt->execute();
-
-
 ?>
+
+<!-- USER CARDS --------------------------------------------------------------->
 <div class="allUsers" style="padding-top 30px;">
 <?php
 while($stmt->fetch()){
-
+    //-- DRAW STUDENT CARD -----------------------------------------------------
     if($type == 'student'){?>
        <div class="userContainer">
-
          <div class="student">
              <h3><?php echo "$firstname, $lastname"; ?></h3>
          </div>
@@ -55,7 +51,6 @@ while($stmt->fetch()){
                   <input type="submit" value="—" class="plusBtn" name="minus">
                   <input type="hidden" value="<?php echo "$userID"; ?>" name="userID">
               </form>
-          <!---------event information & expand btn-->
           <div class="infoContainer">
               <p class="user">
                  <?php echo "<p><strong>User ID:</strong> $userID </p> <p><strong>Email:</strong> $email </p> <p><strong>School:</strong> $school </p>"; ?>
@@ -63,10 +58,9 @@ while($stmt->fetch()){
             </div>
         </div>
     <?php }
-
+    //-- DRAW ORGANISATION CARD ------------------------------------------------
     else if($type == 'organisation'){?>
        <div class="userContainer">
-
          <div class="organisation">
              <h3><?php echo "$organisation"; ?></h3>
          </div>
@@ -81,12 +75,12 @@ while($stmt->fetch()){
               </p>
             </div>
         </div>
-
 <?php
     }
-}
-?>
+}?>
 </div>
+
+
 
 <?php
 include("../footer.php");
