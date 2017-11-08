@@ -55,7 +55,9 @@ if ($db->connect_error) {
               <i class="fa fa-angle-down" aria-hidden="true"></i>
             </a>
             <p class="eventDescription">
-              <?php echo "$description";?>
+              <?php echo "$description
+                            <br>
+                            <strong>$host</strong>";?>
             </p>
           </div>
       </div>
