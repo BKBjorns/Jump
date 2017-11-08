@@ -6,6 +6,17 @@ session_start();
 
     include("config.php");
     include("menu.php");
+
+
+    //connecting to the database.
+    @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+
+    //If it can't connect to the database we have an error.
+    if ($db->connect_error) {
+        echo "could not connect: " . $db->connect_error;
+        printf("<br><a href=index.php>Return to home page </a>");
+        exit();
+    }
 ?>
 
 <div class="search" action="">
@@ -14,13 +25,22 @@ session_start();
     <input type="text" name="shTitle" placeholder="Keyword"><br>
     <input type="date" name="shDate" class="shDate"><br>
 
-    <select class='shSchool' name="shSchool">
-          <option value="School" disabled selected>Select School</option>
-          <option value="JTH">School of Engineering</option>
-          <option value="JIBS">Jönköping International Business School</option>
-          <option value="HLK">School of Education and Communication</option>
-          <option value="HALSO">School of Health and Welfare</option>
-          <option value="otherSchool">Other</option>
+    <select id='selectSchool' name="shSchool">
+
+    <option value = "" disable selected>Select School</option>
+
+        <?php
+        $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
+        $stmt = $db->prepare($schoolDropQuery);
+        $stmt->execute();
+        $stmt -> bind_result($schoolID, $school);
+        $array = array();
+
+
+                while ($stmt-> fetch()){
+                    ?>
+                <option value="<?php echo $schoolID;?>"><?php echo $school; ?></option>
+        <?php } ?>
     </select><br>
 
 
@@ -31,15 +51,7 @@ session_start();
 <div class="allEvents">
   <?php
 
-  //connecting to the database.
-  @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 
-  //If it can't connect to the database we have an error.
-  if ($db->connect_error) {
-      echo "could not connect: " . $db->connect_error;
-      printf("<br><a href=index.php>Return to home page </a>");
-      exit();
-  }
 
 
   $shTitle = "";
@@ -66,7 +78,7 @@ session_start();
 
   $shTitle = addslashes($shTitle);
 
-
+$query = "";
 
   if ($shTitle && !$shDate && !$shSchool) {
       $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'";
