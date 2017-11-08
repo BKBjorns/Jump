@@ -102,53 +102,7 @@ if ($db->connect_error) {
                   </div>
           <?php
           }
-     }
-
-
-//-----GET EVENTS --------------------------------------------------------------
-
-//-- get all events
-// $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate, time";
-// $stmt = $db->prepare($query);
-// $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
-// $stmt->execute();
-
-// while($stmt->fetch()){ ?>
-
-<!---------------------------------EVENT ONE-->
-<!-- <div class="eventContainerOne"> -->
-  <!-----------event img & attend event btn-->
-  <!-- <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div> -->
-
-      <!-- <?php
-      //echo $eventID;
-        // echo '<a class="editBtn" href="organisation_edit.php?eventID=' . urlencode($eventID) . '">
-        //      <i class="fa fa-pencil" aria-hidden="true"></i></a>';
-        ?> -->
-
-  <!---------event information & expand btn-->
-  <!-- <div class="infoContainer">
-        <div class="eventTitle"> -->
-         <?php
-            //echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
-          ?>
-      <!-- </div>
-      <button href="#" class="expanderBtn">
-          <i class="fa fa-angle-down" aria-hidden="true"></i>
-      </button>
-      <p class="eventDescription">
-        <?php echo "$description <br> $host"?>
-      </p>
-    </div>
-</div> -->
-
-<?php  //}
-?>
-
-
-
-
-<!-- </div> -->
+     }?>
 
 
 
