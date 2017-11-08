@@ -64,18 +64,17 @@ session_start();
       $shDate = $_POST['shDate'];
       $shSchool = $_POST['shSchool'];
 
+      //-- XSS -----------------------------------------------------------------------------------------------------
+      $title = htmlentities($shTitle);
+      $security = mysqli_real_escape_string($db, $shTitle);
+
+      $title = addslashes($title);
   }
 
-  // if (isset($_POST['shSchool']) && $_POST['shSchool'] != ""){
-  //   $shSchool = $_POST['shSchool'];
-  // }
 
 
-// XSS
-//Makes unable to write html code into the search fields
-  $shTitle = htmlentities($shTitle);
 
-  $shTitle = addslashes($shTitle);
+
 
 $query = "";
 
