@@ -1,61 +1,57 @@
 <?php
+//-- PAGE SETUP ----------------------------------------------------------------
+
+//-- CHECK IF USER IS LOGGED IN
 session_start();
     if (!isset($_SESSION['userID'])) {
         header("Location:../index.php");
     }
 
+//-- INCLUDE
 include("admin_header.php");
 include("admin_menu.php");
 include("../userinfo.php");
+
+//-- DATABASE CONNECTION
+@ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+if ($db->connect_error) {
+   echo "could not connect: " . $db->connect_error;
+   header("Location: index.php");
+   exit();
+}
 ?>
 
 
 
 <div class="allEvents" style="padding-top: 100px;">
-      <?php
-        //session_start();
-        @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
+<?php
+  //-- DELETE EVENT -------------------------------------------------------------
+  if (isset($_POST['minus'])){
 
-        if ($db->connect_error) {
-            echo "could not connect: " . $db->connect_error;
-            exit();
-        }
-
-    //This deletes the event from the DB.
-    if (isset($_POST['minus'])){
-
-        //@ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
-
-        $eventid = $_POST['eventID'];
-
-        //get the eventID from the input and the userID from the session and insert it into the database
-        $deleteQuery = "DELETE FROM Events WHERE eventID = '{$eventid}'";
-        //$stmt->bind_param('i', $eventID);
-        $stmt = $db->prepare($deleteQuery);
-        $stmt->execute();
+    $eventid = $_POST['eventID'];
+    $deleteQuery = "DELETE FROM Events WHERE eventID = '{$eventid}'";
+    $stmt = $db->prepare($deleteQuery);
+    $stmt->execute();
 
     }
 
 
-        //this selects all event information from the Events db
-        $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate AND time";
-        $stmt = $db->prepare($query);
-        //binds the db information to the variables
-        $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
-        $stmt->execute();
+    //-- SELECT ALL EVENT DATA -------------------------------------------------
+    $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate AND time";
+    $stmt = $db->prepare($query);
+    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
+    $stmt->execute();
 
-        //gets every event in a row and displays the information in the div "eventContainer"
-        while($stmt->fetch()){ ?>
-
-       <!---------------------------------EVENT ONE-->
+    //-- DRAW EVENT CARDS ------------------------------------------------------
+    while($stmt->fetch()){ ?>
        <div class="eventContainerOne">
-          <!-----------event img & attend event btn-->
+          <!-- event img & attend event btn -->
           <div class="imgContainer" style="background-image: url('../uploadedfiles/<?php echo "$image"; ?>');"></div>
           <form method="POST" action='admin_delete.php'>
                   <input type="submit" value="—" class="plusBtn" name="minus">
                   <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
               </form>
-          <!---------event information & expand btn-->
+          <!-- event information & expand btn -->
           <div class="infoContainer">
               <div class="eventTitle">
                  <?php
@@ -70,16 +66,9 @@ include("../userinfo.php");
               </p>
             </div>
        </div>
-
-       <?php  }
-
-
+    <?php  }
     ?>
-
-
-
-
-    </div>
+</div>
 
 
 <?php
