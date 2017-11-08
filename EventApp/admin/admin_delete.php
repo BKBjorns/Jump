@@ -37,7 +37,7 @@ if ($db->connect_error) {
 
 
     //-- SELECT ALL EVENT DATA -------------------------------------------------
-    $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate AND time";
+    $query = "SELECT eventID, title, description, startdate, enddate, time, price, location, image, link, host FROM Events ORDER by startdate, time";
     $stmt = $db->prepare($query);
     $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
     $stmt->execute();

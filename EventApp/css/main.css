@@ -5,9 +5,16 @@ body {
 p {
   margin: 0;
   padding: 0;
+  padding-left: 10px;
   font-family: 'Roboto', sans-serif;
   font-size: 10px;
   font-weight: 300;
+}
+h4 {
+  font-family: 'Roboto', sans-serif;
+  margin: 7px 0 2px;
+  padding-left: 10px;
+  color: #87d7e2;
 }
 h3 {
   margin: 0;
@@ -231,19 +238,6 @@ div.allEvents div.eventContainerOne div.infoContainer p.eventTitle {
   margin-top: 20px;
   float: left;
   padding: 0 10px;
-}
-div.allEvents div.eventContainer div.infoContainer p.eventTitle h4,
-div.allEvents div.eventContainerFirst div.infoContainer p.eventTitle h4,
-div.allEvents div.eventContainerOne div.infoContainer p.eventTitle h4 {
-  font-family: 'Roboto', sans-serif;
-  margin: 7px 0 2px;
-  padding-left: 10px;
-  color: #87d7e2;
-}
-div.allEvents div.eventContainer div.infoContainer p.eventTitle p,
-div.allEvents div.eventContainerFirst div.infoContainer p.eventTitle p,
-div.allEvents div.eventContainerOne div.infoContainer p.eventTitle p {
-  padding-left: 10px;
 }
 div.allEvents div.eventContainer div.infoContainer button.expanderBtn,
 div.allEvents div.eventContainerFirst div.infoContainer button.expanderBtn,

@@ -117,11 +117,11 @@ if ($db->connect_error) {
     <select id='selectCity' name="city">
       <option value = "" disable selected>Select City</option>
       <?php
-        $cityDropQuery = "SELECT ID, Name FROM city WHERE CountryCode = '{$code}' ";
-        $stmt = $db->prepare($cityDropQuery);
-        $stmt->execute();
-        $stmt -> bind_result($cityID, $city);
-        $array = array();
+//        $cityDropQuery = "SELECT ID, Name FROM city WHERE CountryCode = '{$code}' ";
+//        $stmt = $db->prepare($cityDropQuery);
+//        $stmt->execute();
+//        $stmt -> bind_result($cityID, $city);
+//        $array = array();
 
         while ($stmt-> fetch()){?>
             <option value="<?php echo $cityID;?>"><?php echo $city; ?></option>
