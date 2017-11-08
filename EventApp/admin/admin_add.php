@@ -38,7 +38,6 @@ if ($db->connect_error) {
         $time = trim ($_POST['time']);
         $location = trim ($_POST['location']);
         $description = trim ($_POST['description']);
-        $country = trim ($_POST['country']);
 
 
         //-- XSS ---------------------------------------------------------------
@@ -48,10 +47,12 @@ if ($db->connect_error) {
         $time = htmlentities($time);
         $location = htmlentities($location);
         $description = htmlentities($description);
-        $country = htmlentities($country);
 
         //mysqli_real_escape_string: escapes special characters in a string, src:php.net
-        $security = mysqli_real_escape_string($db, $title, $date, $time, $location, $description, $country);
+        $security = mysqli_real_escape_string($db, $date);
+        $security = mysqli_real_escape_string($db, $time);
+        $security = mysqli_real_escape_string($db, $location);
+        $security = mysqli_real_escape_string($db, $description);
 
         //addslashes: Returns a string with backslashes before characters that need to be escaped, src:php.net
         $title = addslashes($title);
@@ -59,17 +60,22 @@ if ($db->connect_error) {
         $time = addslashes($time);
         $location = addslashes($location);
         $description = addslashes($description);
-        $country = addslashes($country);
 
         //-- FILE UPLOAD SECURITY/EXTENSIONS -----------------------------------
+        //define format extensions allowed
         $allowedextensions = array('jpg', 'jpeg', 'gif', 'png');
+        //strtolower: makes lowercase
+        //substr: returns part of string, , src:php.net
+        //Find the position of the last occurrence of a substring in a string, src:php.net
         $extension = strtolower(substr($_FILES['upload']['name'], strrpos($_FILES['upload']['name'], '.') + 1));
+        //create array to push in possible errors
         $error = array ();
 
         //ERROR ONE, WRONG FORMAT
         if(in_array($extension, $allowedextensions) === false){
           #add a new array entry
           $error[] = 'This is not an image, upload is allowed only for images.';
+          //display error
           echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
         }
         //ERROR TWO, SIZE
@@ -79,7 +85,9 @@ if ($db->connect_error) {
         }
         //NO ERROR
         if(empty($error)){
+          //get image name
           $image = $_FILES['upload']['name'];
+          //move image to upload folder
           move_uploaded_file($_FILES['upload']['tmp_name'], "../uploadedfiles/" . $image);
 
           $uploadQuery = ("INSERT INTO `Events`(`title`, `description`, `startdate`, `time`, `image`, `location`, `host`, school) VALUES ('$title', '$description', '$date', '$time', '$image', '$location', '$host', '$school')");
