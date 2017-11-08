@@ -23,24 +23,6 @@ session_start();
           <option value="otherSchool">Other</option>
     </select><br>
 
-    <!-- <select class='shOrg' name="shOrg">
-        <option value="organisation" disabled selected>Select organisation</option>
-        <option value="SU">Student Union</option>
-        <option value="HITECH">HI Tech</option>
-        <option value="HINT">HINT</option>
-        <option value="HIKE">HIKE</option>
-        <option value="HILIFE">HI Life</option>
-        <option value="SUSHI">S.U.S.H.I.</option>
-        <option value="LOK">L.O.K.</option>
-        <option value="Kosmo">Kosmo</option>
-        <option value="JSA">J.S.A.</option>
-        <option value="JUSA">JUSA.</option>
-        <option value="JURA">JURA.</option>
-        <option value="JISC">JISC</option>
-        <option value="Qult">Qultmästeriet</option>
-        <option value="spectra">Spectra</option>
-        <option value="WCN">WestCoast Nation</option>
-    </select><br> -->
 
     <input type="submit" name="submit" value="Search!" class='submitBtn'>
   </form>
