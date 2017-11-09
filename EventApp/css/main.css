@@ -550,22 +550,23 @@ div.container div#selectUserType ul {
   list-style: none;
   padding: 0;
 }
-div.container div#selectUserType ul li {
+div.container div#selectUserType ul li #radio {
   font-family: 'Roboto', sans-serif;
   font-size: 25px;
   width: 50%;
   background-color: rgba(255, 255, 255, 0.7);
-  color: #87d7e2;
+  color: #87d7e2 !important;
   padding: 20px;
   border-radius: 5px;
 }
-div.container div#selectUserType ul li input[type="radio"] {
+div.container div#selectUserType ul li #radio input[type="radio"] {
   position: absolute;
   visibility: hidden;
 }
-div.container div#selectUserType ul li label {
+div.container div#selectUserType ul li #radio label {
   cursor: pointer;
   text-align: center;
+  color: white !important;
 }
 div.container form.newUserForm {
   margin: 150px auto 50px auto;

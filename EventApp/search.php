@@ -123,11 +123,14 @@ if(isset($_POST['submit'])){
            if (isset($_POST['plus'])){
 
                 //get eventID (hidden input) and userID (session)
-                $eventid = $_POST['eventID'];
                 $userid = $_SESSION['userID'];
+                $eventid = $_POST['eventID'];
 
-                $insertQuery = "INSERT INTO Attend (eventID, userID) VALUES ($eventid, $userid)";
+
+
+                $insertQuery = "INSERT INTO Attend (eventID, userID) VALUES (?, ?)";
                 $insert_stmt = $db->prepare($insertQuery);
+                $insert_stmt->bind_param('ii', $eventid, $userid);
                 $insert_stmt->execute();
               //  header("Location: events.php");
 
