@@ -1,7 +1,10 @@
 <?php
+//-- PAGE SETUP ----------------------------------------------------------------
+
+//-- INCLUDE
 include("header.php");
 
-
+//-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 if ($db->connect_error) {
    echo "could not connect: " . $db->connect_error;
@@ -11,6 +14,7 @@ if ($db->connect_error) {
 
 ?>
 
+<!-- FORM START --------------------------------------------------------------->
 <div class='wrapper'>
    <div id="back">
         <a href="index.php"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
@@ -18,67 +22,54 @@ if ($db->connect_error) {
     <div class="logoLogin">
     <div class="container">
 
-
-<!-- Select user type , Student or Organization window  -->
-
-        <div id='selectUserType'>
-            <ul>
-
-                    <li>
-                        <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'>
-                        <label for="student">Student</label>
-                    </li>
-
-                    <li>
-                        <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'>
-                        <label for="org">Organization</label>
-                    </li>
-
-            </ul>
-
-        </div>
+<!-- SELECT USER TYPE  -------------------------------------------------------->
+    <div id='selectUserType'>
+        <ul>
+          <li>
+              <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'>
+              <label for="student">Student</label>
+          </li>
+          <li>
+              <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'>
+              <label for="org">Organization</label>
+          </li>
+        </ul>
+    </div>
 
 
- <!--     Form for new student      -->
+ <!--  STUDENT FORM  ---------------------------------------------------------->
         <form action='newuser.php' method="POST" class='newUserForm' enctype="multipart/form-data">
             <div id='newStudentForm'>
+                  <input type='text' name='nuFirstname' placeholder='First name' class='inputField'>
+                  <br>
+                  <input type='text' name='nuLastname' placeholder='Last name' class='inputField'>
+                  <br>
+                  <input type='email' name='nuEmail' placeholder='Email' class='inputField'>
+                  <br>
+                  <input type='password' name='nuPass' placeholder='Password' class='inputField'>
+                  <br>
+                  <br>
+                  <!-- SELECT SCHOOL ------------------------------------------>
+                  <select id='selectSchool' name="school">
+                  <option value = "" disable selected>Select School</option>
+                      <?php
+                      $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
+                      $stmt = $db->prepare($schoolDropQuery);
+                      $stmt->execute();
+                      $stmt -> bind_result($schoolID, $school);
+                      $array = array();
 
-
-                    <input type='text' name='nuFirstname' value='First name' class='inputField'>
-                    <br>
-                    <input type='text' name='nuLastname' value='Last name' class='inputField'>
-
-                    <br>
-                    <input type='email' name='nuEmail' value='Email' class='inputField'>
-
-                    <br>
-                    <input type='password' name='nuPass' value='Password' class='inputField'>
-                    <br>
-                    <!--<input type='password' name='nuPassConf' value='Password' class='inputField'>-->
-                    <br>
-                    <input type='file' name='upload' >
-                    <br>
-                    <br>
-                    <!--                <input type='text' name='nuSchool' value='School' class='inputField'>-->
-                    <select id='selectSchool' name="school">
-                    <option value = "" disable selected>Select School</option>
-                        <?php
-                    $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
-                    $stmt = $db->prepare($schoolDropQuery);
-                    $stmt->execute();
-                    $stmt -> bind_result($schoolID, $school);
-                    $array = array();
-
-                    while ($stmt-> fetch()){?>
+                      while ($stmt-> fetch()){?>
                         <option value="<?php echo $schoolID;?>"><?php echo $school; ?></option>
-                <?php } ?>
-                </select>
-
-                    <br>
-                    <input type='submit' value='Submit!' class='submitBtn'>
-
-
-             </div>
+                    <?php } ?>
+                  </select>
+              <!-- FILE UPLOAD -------------------------------------------->
+                  <br>
+                  <input type='file' name='upload' >
+                  <br>
+                  <br>
+                  <input type='submit' value='Submit!' class='submitBtn'>
+           </div>
         </form>
 
  <!--    Form for new organization      -->
