@@ -10,7 +10,7 @@ session_start();
 //-- INCLUDE
 include("header.php");
 include("menu.php");
-include("userinfo.php");
+//include("userinfo.php");
 
 //-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);

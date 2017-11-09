@@ -89,7 +89,8 @@ if(isset($_POST['submit'])){
       }
 
       if ($shTitle && $shDate && !$shSchool) {
-          $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'AND startdate LIKE '%" . $shDate . "%' ORDER by startdate, time";
+          $query = "SELECT * FROM Events WHERE startdate = '{$shDate}' AND title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'";
+          echo "4";
       }
 
       if ($shTitle && !$shDate && $shSchool) {
@@ -108,9 +109,11 @@ if(isset($_POST['submit'])){
 
 
         $stmt = $db->prepare($query);
+        echo $query;
         $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $school, $country);
-        $stmt->execute();
 
+        $stmt->execute();
+        echo $eventID;
 
     // When there is no search result
         $stmt->store_result();
@@ -119,14 +122,16 @@ if(isset($_POST['submit'])){
         if($noresult === 0){
           echo "Your search did not return any results";
         }else{
+          $userid = $_SESSION['userID'];
+          $eventid = $_POST['eventID'];
+          echo $userid;
+          echo $eventid;
           //-----ATTEND EVENT----------------------------------------------------------
            if (isset($_POST['plus'])){
 
                 //get eventID (hidden input) and userID (session)
                 $userid = $_SESSION['userID'];
-                $eventid = $_POST['eventID'];
-
-
+                $eventid = $_POST['eventid'];
 
                 $insertQuery = "INSERT INTO Attend (eventID, userID) VALUES (?, ?)";
                 $insert_stmt = $db->prepare($insertQuery);
@@ -140,7 +145,7 @@ if(isset($_POST['submit'])){
            if (isset($_POST['minus'])){
 
                $userid = $_SESSION['userID'];
-               $eventid = $_POST['eventID'];
+               $eventid = $_POST['eventid'];
 
                $deleteQuery = "DELETE FROM Attend WHERE eventID = '{$eventid}' AND userID = $userid ";
                $delete_stmt = $db->prepare($deleteQuery);
@@ -166,13 +171,15 @@ if(isset($_POST['submit'])){
 
 
             while($stmt->fetch()){
+              echo $eventID,$title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host;
               //-- ALREADY ATTENDED EVENTS ---------------------------------------
               if ((in_array ($eventID, $array))){?>
                   <div class="eventContainerOne">
                       <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
                       <form method="POST" action='user.php'>
                             <input type="submit" value="-" class="plusBtn" name="minus">
-                            <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
+                            <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventid">
+                            echo $eventID;
                         </form>
                       <div class="infoContainer">
                         <p class="eventTitle">
@@ -196,36 +203,36 @@ if(isset($_POST['submit'])){
                   </div>
               <?php
               //-- NOT ATTENDED EVENTS -------------------------------------------
-            }else if ((in_array ($eventID, $array))=== false){
-              //print_r ($array);?>
-              <div class="eventContainerOne">
-                  <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
-                  <form method="POST" action='user.php'>
-                        <input type="submit" value="+" class="plusBtn" name="plus">
-                        <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
-                    </form>
-                  <div class="infoContainer">
-                    <p class="eventTitle">
-                       <?php
-                          echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
-                        ?>
-                    </p>
-                    <button href="#" class="expanderBtn">
-                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </button>
-                    <p class="eventDescription">
-                      <?php
-                         echo "$description";
-                       ?>
-                    </p>
-                    <p class="descriptionHost">
-                      <?php
-                      echo "<strong>$host</strong>" ?>
-                    </p>
-                  </div>
+            }else{
+            //print_r ($array);?>
+            <div class="eventContainerOne">
+                <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
+                <form method="POST" action='user.php'>
+                      <input type="submit" value="+" class="plusBtn" name="plus">
+                      <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
+                  </form>
+                <div class="infoContainer">
+                  <p class="eventTitle">
+                     <?php
+                        echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
+                      ?>
+                  </p>
+                  <button href="#" class="expanderBtn">
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <p class="eventDescription">
+                    <?php
+                       echo "$description";
+                     ?>
+                  </p>
+                  <p class="descriptionHost">
+                    <?php
+                    echo "<strong>$host</strong>" ?>
+                  </p>
                 </div>
-          <?php
-            }
+              </div>
+        <?php
+          }
           }
 
         } ?>

@@ -39,6 +39,7 @@ if ($db->connect_error) {
       $location = trim ($_POST['location']);
       $description = trim ($_POST['description']);
       $country = $_POST['country'];
+      //echo $country;
 
       //-- XSS -----------------------------------------------------------------
       $title = htmlentities($title);
@@ -84,7 +85,7 @@ if ($db->connect_error) {
         $stmt = $db->prepare($uploadQuery);
         $stmt->execute();
         //echo "<h3>Event has been added!</h3>";
-        header("location:organisation.php");
+        //header("location:organisation.php");
       }
     }
  ?>
@@ -112,22 +113,22 @@ if ($db->connect_error) {
       </select>
 
 <?php
-  //-- CITY DROPDOWN -----------------------------------------------------------
-  if (isset($_POST['country'])){?>
-    <select id='selectCity' name="city">
-      <option value = "" disable selected>Select City</option>
-      <?php
-//        $cityDropQuery = "SELECT ID, Name FROM city WHERE CountryCode = '{$code}' ";
-//        $stmt = $db->prepare($cityDropQuery);
-//        $stmt->execute();
-//        $stmt -> bind_result($cityID, $city);
-//        $array = array();
-
-        while ($stmt-> fetch()){?>
-            <option value="<?php echo $cityID;?>"><?php echo $city; ?></option>
-          <?php } ?>
-      </select>
-    <?php  }?>
+//   //-- CITY DROPDOWN -----------------------------------------------------------
+//   if (isset($_POST['country'])){?>
+<!-- //     <select id='selectCity' name="city"> -->
+<!-- //       <option value = "" disable selected>Select City</option> -->
+       <?php
+// //        $cityDropQuery = "SELECT ID, Name FROM city WHERE CountryCode = '{$code}' ";
+// //        $stmt = $db->prepare($cityDropQuery);
+// //        $stmt->execute();
+// //        $stmt -> bind_result($cityID, $city);
+// //        $array = array();
+//
+//         while ($stmt-> fetch()){?>
+<!-- //             <option value="<?php //echo $cityID;?>"><?php //echo $city; ?></option> -->
+          <?php //} ?>
+<!-- //       </select> -->
+    <?php  //}?>
     <!-- FORM REST ------------------------------------------------------------>
     <h4>Picture upload</h4>
     <input type="file" name="upload"><br>
