@@ -45,7 +45,7 @@ while($stmt->fetch()){
     if($type == 'student'){?>
        <div class="userContainer">
          <div class="student">
-             <h3><?php echo "$firstname, $lastname"; ?></h3>
+             <h3><?php echo "$firstname $lastname"; ?></h3>
          </div>
           <form method="POST" action='admin_deleteuser.php'>
                   <input type="submit" value="—" class="plusBtn" name="minus">

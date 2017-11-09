@@ -10,6 +10,7 @@ session_start();
 //-- INCLUDE
 include("header.php");
 include("menu.php");
+include("userinfo.php");
 
 //-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
@@ -23,7 +24,7 @@ $type = $_SESSION['type'];
 ?>
 
 <!-- DRAW EVENT CARDS --------------------------------------------------------->
-<div class="allEvents">
+<div class="allEvents" style="margin-top:130px;">
    <?php
    //-----ATTEND EVENT----------------------------------------------------------
         if (isset($_POST['plus'])){

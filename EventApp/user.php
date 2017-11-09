@@ -10,7 +10,7 @@ session_start();
 //-- INCLUDE
 include("header.php");
 include("menu.php");
-//include("userinfo.php");
+include("userinfo.php");
 
 //-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
@@ -23,8 +23,15 @@ $userID = $_SESSION['userID'];
 ?>
 
 <!-- EVENT CARDS -------------------------------------------------------------->
-<div style="margin-top: 150px;" class="allEvents">
+<div style="margin-top: 130px;" class="allEvents">
 <?php
+    
+    //-- DELETE PASSED EVENTS --------------------------------------------------
+    $current_time = date("Y/m/d");
+
+    $stmt = $db->prepare("DELETE FROM Events WHERE startdate < '$current_time'");
+    $stmt->execute();
+    
   //-- DELETE EVENT ------------------------------------------------------------
   if (isset($_POST['minus'])){
     $eventid = $_POST['eventID'];
@@ -33,16 +40,44 @@ $userID = $_SESSION['userID'];
     $stmt = $db->prepare($deleteQuery);
     $stmt->execute();
   }
+    
 
-  //-- JOIN TO GET EVENTS USER ATTENDED ----------------------------------------
+  
+    
+//  //-- IF THE USER HAS NO ATTENDED EVENTS ----------------------------------------
+//  
+//  $attendQuery = "SELECT eventID FROM Attend WHERE userID = '{$userid}' ";
+//
+//        $attend_stmt = $db->prepare($attendQuery);
+//        $attend_stmt->execute();
+//        $attend_stmt->bind_result($eventID);
+//    
+//        $array = array();
+//        //-- STORE EVENTID IN ARRAY
+//        while($attend_stmt->fetch()){
+//            echo $eventID;
+//            $array[] = $eventID;
+//        }
+//    //print_r ($array);
+//        $attend_stmt->close();
+    
+    
+//-- JOIN TO GET EVENTS USER ATTENDED ----------------------------------------
   $query = "SELECT Events.eventID, Events.title, Events.description, Events.startdate, Events.enddate, Events.time, Events.price, Events.location, Events.image, Events.link, Events.host FROM Events
   JOIN Attend on Events.eventID = Attend.eventID
   JOIN Users on Users.userID = Attend.userID
-  WHERE Users.userID = '{$userID}'";
+  WHERE Users.userID = '{$userID}' ORDER BY startdate, time";
 
   $stmt = $db->prepare($query);
   $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host);
   $stmt->execute();
+
+//    print_r ($array);
+//  if(empty($array)){
+//      echo "<h4 style='margin-top: 10px;'>You have no attended events</h4>";
+//      exit();
+//  }
+    
   while($stmt->fetch()){ ?>
 
  <div class="eventContainerOne">
