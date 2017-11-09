@@ -7,6 +7,15 @@ include("header.php");
 include("menu.php");
 include("userinfo.php");
 
+
+//--ORGANISATION SECURITY
+$type = $_SESSION['type'];
+
+if ( $type == 'student'){
+  header("location:user.php");
+  exit();
+}
+
 //-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 if ($db->connect_error) {
