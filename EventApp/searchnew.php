@@ -134,8 +134,12 @@ if(isset($_POST['submit'])){
                </button>
                <p class="eventDescription">
                  <?php
-                    echo "$description <br> $host";
+                    echo "$description";
                   ?>
+               </p>
+               <p class="descriptionHost">
+                 <?php
+                 echo "<strong>$host</strong>" ?>
                </p>
           </div>
         </div>
