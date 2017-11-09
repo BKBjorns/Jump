@@ -21,7 +21,7 @@ include("header.php");
               </div>
             </div>
             <div class="newuserdiv">
-              <a href="newuser.php" class="newuser">New User?</a>
+              <a href="newuser.php" class="newuser">Sign Up?</a>
             </div>
         </div>
     </div>
