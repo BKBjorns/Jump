@@ -1,8 +1,6 @@
 <?php
 //-- PAGE SETUP ----------------------------------------------------------------
 
-
-
 //-- INCLUDE
 include("header.php");
 include("menu.php");

@@ -186,10 +186,7 @@ if(isset($_POST['submit'])){
                           <input type="submit" value="—" class="plusBtn" name="minus">
                           <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
                       </form>
-                      <?php
-                        echo '<a class="orgEditBtn" href="organisation_edit.php?eventID=' . urlencode($eventID) . '">
-                             <i class="fa fa-pencil" aria-hidden="true"></i></a>';
-                        ?>
+        
                       <div class="infoContainer">
                         <p class="eventTitle">
                            <?php
