@@ -124,7 +124,7 @@ if(isset($_POST['submit'])){
               $insertQuery = "INSERT INTO Attend (eventID, userID) VALUES ($eventid, $userid)";
               $insert_stmt = $db->prepare($insertQuery);
               $insert_stmt->execute();
-              header("Location: events.php");
+            //  header("Location: events.php");
 
           }
 
@@ -137,7 +137,7 @@ if(isset($_POST['submit'])){
              $deleteQuery = "DELETE FROM Attend WHERE eventID = '{$eventid}' AND userID = $userid ";
              $delete_stmt = $db->prepare($deleteQuery);
              $delete_stmt->execute();
-             header("Location: events.php");
+             //header("Location: events.php");
           }
 
           //-----GET EVENTS FROM ATTEND-------------------------------------------
@@ -162,7 +162,7 @@ if(isset($_POST['submit'])){
             if ((in_array ($eventID, $array))){?>
                 <div class="eventContainerOne">
                     <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
-                    <form method="POST" action='events.php'>
+                    <form method="POST" action='user.php'>
                           <input type="submit" value="-" class="plusBtn" name="minus">
                           <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
                       </form>
@@ -186,7 +186,7 @@ if(isset($_POST['submit'])){
             //print_r ($array);?>
             <div class="eventContainerOne">
                 <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
-                <form method="POST" action='events.php'>
+                <form method="POST" action='user.php'>
                       <input type="submit" value="+" class="plusBtn" name="plus">
                       <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
                   </form>

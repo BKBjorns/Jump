@@ -36,7 +36,7 @@ if ( $type == 'student'){?>
         <ul id="dropDown">
             <li><a class="dropDownLink <?php echo($current_page == 'organisation_events.php') ? 'active' : NULL?>" href="organisation_events.php">Event Overview</a></li>
             <li><a class="dropDownLink <?php echo($current_page == 'organisation.php'|| $current_page == "" ) ? 'active' : NULL?>" href="organisation.php">My Events</a></li>
-            <li><a class="dropDownLink <?php echo($current_page == 'searchnew.php'|| $current_page == "" ) ? 'active' : NULL?>" href="search.php">Search</a></li>
+            <li><a class="dropDownLink <?php echo($current_page == 'search_org.php'|| $current_page == "" ) ? 'active' : NULL?>" href="search_org.php">Search</a></li>
             <li><a class="dropDownLink" href="logout.php">Log Out</a></li>
         </ul>
 </header>
