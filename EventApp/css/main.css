@@ -10,6 +10,13 @@ p {
   font-size: 10px;
   font-weight: 300;
 }
+h2 {
+  font-family: 'Roboto', sans-serif;
+  color: #87d7e2;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 32px;
+}
 h4 {
   font-family: 'Roboto', sans-serif;
   margin: 7px 0 2px;
