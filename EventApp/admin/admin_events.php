@@ -1,16 +1,22 @@
 <?php
 //-- PAGE SETUP ----------------------------------------------------------------
 
-//-- CHECK IF USER IS LOGGED IN
-session_start();
-    if (!isset($_SESSION['userID'])) {
-        header("Location:../index.php");
-    }
 
 //-- INCLUDE
 include("admin_header.php");
 include("../menu.php");
 include("../userinfo.php");
+
+//--ADMIN SECURITY
+$type = $_SESSION['type'];
+
+if ( $type == 'student'){
+  header("location:../user.php");
+  exit();
+}else if ($type == 'organisation'){
+  header("location:../organisation.php");
+}
+
 
 //-- DATABASE CONNECTION
 @ $db = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
