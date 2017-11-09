@@ -72,7 +72,7 @@ if ($db->connect_error) {
         </form>
 
         <!-- ADD NEW ORGANISATION ----------------------------------------------------->
-        <form method="POST" class='newUserForm'>
+        <form method="POST" class='newUserForm' enctype="multipart/form-data">
             <div id='newOrgForm'>
               <input type='text' name='orgname' placeholder='Organization' class='inputField'>
               <br>
@@ -100,7 +100,7 @@ if ($db->connect_error) {
                   </select>
                   <!-- FILE UPLOAD ----------------------------------------------------------------------------------------->
                   <h4>Picture upload</h4>
-                  <input type="file" name="upload" enctype="multipart/form-data">
+                  <input type="file" name="upload">
                   <br>
                   <input type='submit' value='Submit!' class='submitBtn'>
             </div>
