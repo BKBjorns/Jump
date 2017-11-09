@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    
+
     .fa.fa-chevron-left{
         color: #ffffff;
         font-size: 35px;
@@ -15,55 +15,115 @@
 }
 
 div.container{
-    
-    div#selectUserType{
+text-align: center;
+margin:auto;
 
+    div#selectUserType{
         margin-top: 200px;
-        
-        
+
         ul{
             list-style: none;
-            
+            padding: 0;
+
+
             li{
                 font-family: @font-base;
-                font-size: 30px;
-                color: #ffffff;
+                font-size: 25px;
+                width: 50%;
+                background-color: @color-transparent;
+                color: @color-base;
+                padding: 20px;
+                border-radius: 5px;
+
+
+                input[type="radio"]{
+                  // height: 20px;
+                  // width: 20px;
+                  // background: @color-transparent;
+                  // border: none;
+                  position: absolute;
+                  visibility: hidden;
+                }
+
+                label{
+                  cursor: pointer;
+                  text-align: center;
+
+                }
+
+
             }
-            
+
         }
     }
-    
+
              form.newUserForm{
                  margin: 150px auto 50px auto;
                  text-align: center;
-                 
+                 color: #ffffff;
+
                  input.submitBtn{
                      background: @color-transparent;
                      height: 50px;
                      width: 50%;
                      border-radius: 3px;
                      border: none;
-                     color: @color-base; 
+                     color: @color-base;
                      font-size: @fontSize-Btn;
                      margin-top: 2%;
                  }
-                 
+
                  input.submitBtn:active{
                      background: none;
                      border: solid 1px @color-transparent;
                      color: #ffffff;
                  }
-                 
+
                  input.inputField{
-                    width: 49%;
+                   margin-top: 2%;
+                    width: 50%;
                     height: 30px;
                     border: none;
-                    border-bottom: solid #ffffff;
+                    border-bottom: solid #ffffff 2px;
+                    border-radius: 0;
                     color: #ffffff;
                     background: none;
                     font-family: @font-base;
                     font-size: @fontSize-Btn;
-                     
+
+                 }
+
+                 input.inputField::placeholder{
+                   color:#ffffff;
+                 }
+
+                 #selectSchool{
+                   margin: 2% 0 3%;
+                   width: 52%;
+                   height: 30px;
+                   border: none;
+                   border-bottom: solid #ffffff 2px;
+                   background: none;
+                   font-family: @font-base;
+                   font-size: @fontSize-Btn;
+                   border-radius: 0;
+
+
+                   option{
+                     background-color: #ffffff;
+                   }
+                 }
+
+
+                 h4{
+                   color: #ffffff;
+                 }
+
+                 input[type = "file"]{
+                   color: #ffffff;
+                   font-family: @font-base;
+                   font-size: @fontSize-Btn;
+                   width: 50%;
                  }
             }
 }
