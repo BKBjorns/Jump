@@ -85,7 +85,7 @@ if ($db->connect_error) {
         $stmt = $db->prepare($uploadQuery);
         $stmt->execute();
         //echo "<h3>Event has been added!</h3>";
-        //header("location:organisation.php");
+        header("location:organisation.php");
       }
     }
  ?>

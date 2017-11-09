@@ -133,8 +133,8 @@ if(isset($_POST['submit'])){
         if($noresult === 0){
           echo "Your search did not return any results";
         }else{
-          // $userid = $_SESSION['userID'];
-          // $eventid = $_POST['eventID'];
+          //$userid = $_SESSION['userID'];
+          //$eventid = $_POST['eventID'];
           //echo $userid;
           //echo $eventid;
           //-----ATTEND EVENT----------------------------------------------------------
@@ -184,14 +184,17 @@ if(isset($_POST['submit'])){
             while($stmt->fetch()){
               //echo $eventID,$title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host;
               //-- ALREADY ATTENDED EVENTS ---------------------------------------
-              if ((in_array ($eventID, $array))){?>
+                            if ((in_array ($eventID, $array))){ ?>
                   <div class="eventContainerOne">
                       <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
                       <form method="POST" action='user.php'>
-                            <input type="submit" value="-" class="plusBtn" name="minus">
-                            <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventid">
-                            <!-- echo $eventID; -->
-                        </form>
+                          <input type="submit" value="—" class="plusBtn" name="minus">
+                          <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
+                      </form>
+                      <?php
+                        echo '<a class="orgEditBtn" href="organisation_edit.php?eventID=' . urlencode($eventID) . '">
+                             <i class="fa fa-pencil" aria-hidden="true"></i></a>';
+                        ?>
                       <div class="infoContainer">
                         <p class="eventTitle">
                            <?php
@@ -210,13 +213,12 @@ if(isset($_POST['submit'])){
                           <?php
                           echo "<strong>$host</strong>" ?>
                         </p>
+                      </div>
                     </div>
-                  </div>
               <?php
-              //-- NOT ATTENDED EVENTS -------------------------------------------
-            }else{
-            //print_r ($array);?>
-            <div class="eventContainerOne">
+              //-- events not hosted by that organisation
+              }else if ((in_array ($eventID, $array)) === false) { ?>
+                  <div class="eventContainerOne">
                 <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
                 <form method="POST" action='user.php'>
                       <input type="submit" value="+" class="plusBtn" name="plus">
@@ -242,8 +244,8 @@ if(isset($_POST['submit'])){
                   </p>
                 </div>
               </div>
-        <?php
-          }
+              <?php
+              }
           }
 
         } ?>
