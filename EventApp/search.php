@@ -4,7 +4,7 @@ session_start();
         header("Location:index.php");
     }
 
-    include("config.php");
+    include ("header.php");
     include("menu.php");
 
 
@@ -67,7 +67,7 @@ session_start();
       $title = htmlentities($shTitle);
       $security = mysqli_real_escape_string($db, $shTitle);
 
-      $title = addslashes($title);
+      $title = addslashes($shTitle);
   }
 
 
@@ -111,7 +111,7 @@ $query = "";
 
 
     $stmt = $db->prepare($query);
-    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $country);
+    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $school, $country);
     $stmt->execute();
 
 
