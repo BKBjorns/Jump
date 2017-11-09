@@ -218,8 +218,8 @@ div.allEvents div.eventContainerFirst form input.editBtn,
 div.allEvents div.eventContainerOne form input.editBtn {
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border: solid 0.4px #a9a9a9;
+  background: #ffffff;
+  border: solid 0.5px #a9a9a9;
   border-radius: 10px;
   box-shadow: 0px 0.5px 0.5px #a9a9a9;
   font-weight: 300;
@@ -302,8 +302,8 @@ div.eventContainerFirst {
 input.minusBtn {
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border: solid 0.4px #a9a9a9;
+  background: #ffffff;
+  border: solid 0.5px #a9a9a9;
   border-radius: 10px;
   box-shadow: 0px 0.5px 0.5px #a9a9a9;
   font-weight: 300;
@@ -454,8 +454,8 @@ div.allEvents div.addEvent a.plusBtn {
   float: right;
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border: solid 0.4px #a9a9a9;
+  background: #ffffff;
+  border: solid 0.5px #a9a9a9;
   border-radius: 10px;
   box-shadow: 0px 0.5px 0.5px #a9a9a9;
   font-weight: 300;
@@ -739,8 +739,8 @@ div.allUsers div.userContainer form input.plusBtn,
 div.allUsers div.userContainer form input.editBtn {
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border: solid 0.4px #a9a9a9;
+  background: #ffffff;
+  border: solid 0.5px #a9a9a9;
   border-radius: 10px;
   box-shadow: 0px 0.5px 0.5px #a9a9a9;
   font-weight: 300;
@@ -791,8 +791,8 @@ div.allEvents div.eventContainerOne a.orgEditBtn {
   right: 10px;
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border: solid 0.4px #a9a9a9;
+  background: #ffffff;
+  border: solid 0.5px #a9a9a9;
   border-radius: 10px;
   box-shadow: 0px 0.5px 0.5px #a9a9a9;
   font-weight: 300;
