@@ -218,7 +218,7 @@ div.allEvents div.eventContainerFirst form input.editBtn,
 div.allEvents div.eventContainerOne form input.editBtn {
   width: 20px;
   height: 20px;
-  background: #ffffff;
+  background: #ffffff !important;
   border: solid 0.5px #a9a9a9;
   border-radius: 10px;
   box-shadow: 0px 0.5px 0.5px #a9a9a9;
@@ -242,7 +242,7 @@ div.allEvents div.eventContainerOne div.infoContainer p.eventTitle {
 div.allEvents div.eventContainer div.infoContainer button.expanderBtn,
 div.allEvents div.eventContainerFirst div.infoContainer button.expanderBtn,
 div.allEvents div.eventContainerOne div.infoContainer button.expanderBtn {
-  margin: 10px;
+  margin: -10px 10px 10px 10px;
   float: right;
   width: 19px;
   height: 19px;
@@ -263,10 +263,15 @@ div.allEvents div.eventContainerOne div.infoContainer button.expanderBtn i.fa.fa
 div.allEvents div.eventContainer div.infoContainer p.eventDescription,
 div.allEvents div.eventContainerFirst div.infoContainer p.eventDescription,
 div.allEvents div.eventContainerOne div.infoContainer p.eventDescription {
-  margin-top: 40px;
+  margin-top: 16px !important;
   clear: left;
   padding: 0 10px 20px 10px;
   display: none;
+}
+div.allEvents div.eventContainer div.infoContainer p.descriptionHost,
+div.allEvents div.eventContainerFirst div.infoContainer p.descriptionHost,
+div.allEvents div.eventContainerOne div.infoContainer p.descriptionHost {
+  margin-bottom: 10px;
 }
 div.userInfo {
   width: 100%;
