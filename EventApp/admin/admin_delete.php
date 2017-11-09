@@ -58,13 +58,17 @@ if ($db->connect_error) {
                     echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p> <p><strong>Location: </strong> $location</p>";
                   ?>
               </div>
-              <a href="#" class="expanderBtn">
+              <button href="#" class="expanderBtn">
                   <i class="fa fa-angle-down" aria-hidden="true"></i>
-              </a>
+              </button>
               <p class="eventDescription">
-                <?php echo "$description 
-                    <br> 
-                    <strong>$host</strong>";?>
+                <?php
+                   echo "$description";
+                 ?>
+              </p>
+              <p class="descriptionHost">
+                <?php
+                echo "<strong>$host</strong>" ?>
               </p>
             </div>
        </div>

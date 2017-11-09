@@ -98,11 +98,17 @@ $type = $_SESSION['type'];
                             echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
                           ?>
                       </p>
-                      <a href="#" class="expanderBtn">
+                      <button href="#" class="expanderBtn">
                           <i class="fa fa-angle-down" aria-hidden="true"></i>
-                      </a>
+                      </button>
                       <p class="eventDescription">
-                        <?php echo "$description";?>
+                        <?php
+                           echo "$description";
+                         ?>
+                      </p>
+                      <p class="descriptionHost">
+                        <?php
+                        echo "<strong>$host</strong>" ?>
                       </p>
                   </div>
                 </div>
@@ -122,11 +128,17 @@ $type = $_SESSION['type'];
                         echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
                       ?>
                   </p>
-                  <a href="#" class="expanderBtn">
+                  <button href="#" class="expanderBtn">
                       <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </a>
+                  </button>
                   <p class="eventDescription">
-                    <?php echo "$description";?>
+                    <?php
+                       echo "$description";
+                     ?>
+                  </p>
+                  <p class="descriptionHost">
+                    <?php
+                    echo "<strong>$host</strong>" ?>
                   </p>
                 </div>
               </div>
