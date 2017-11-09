@@ -2,14 +2,11 @@
 //-- PAGE SETUP ----------------------------------------------------------------
 
 //-- CHECK IF USER IS LOGGED IN
-session_start();
-    if (!isset($_SESSION['userID'])) {
-        header("Location:../index.php");
-    }
+
 
 //-- INCLUDE
 include("admin_header.php");
-include("admin_menu.php");
+include("../menu.php");
 include("../userinfo.php");
 
 //-- DATABASE CONNECTION

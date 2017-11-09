@@ -9,7 +9,7 @@ session_start();
 
 //-- INCLUDE
 include("admin_header.php");
-include("admin_menu.php");
+include("../menu.php");
 include("../userinfo.php");
 
 //-- DATABASE CONNECTION
@@ -185,7 +185,7 @@ if ($db->connect_error) {
                        $stmt->execute();
                       //redirects the user to the login page after data is saved in db
 					  echo "<script>window.location.href='admin_deleteuser.php'</script>";
-                       
+
                        exit;
                   }
             }

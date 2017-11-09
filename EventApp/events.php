@@ -1,11 +1,7 @@
 <?php
 //-- PAGE SETUP ----------------------------------------------------------------
 
-//-- CHECK IF USER IS LOGGED IN
-session_start();
-    if (!isset($_SESSION['userID'])) {
-        header("Location:index.php");
-    }
+
 
 //-- INCLUDE
 include("header.php");

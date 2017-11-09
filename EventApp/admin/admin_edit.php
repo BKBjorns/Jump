@@ -9,7 +9,7 @@ session_start();
 
 //-- INCLUDE
 include("admin_header.php");
-include("admin_menu.php");
+include("../menu.php");
 include("../userinfo.php");
 
 //-- DATABASE CONNECTION
