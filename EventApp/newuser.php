@@ -82,13 +82,11 @@ if ($db->connect_error) {
         </form>
 
  <!--    Form for new organization      -->
-        <form action='newuser.php' method="POST" class='newUserForm'>
+        <form action='newuser.php' method="POST" class='newUserForm' enctype="multipart/form-data">
             <div id='newOrgForm'>
 
 
                     <input type='text' name='orgname' value='Organization' class='inputField'>
-
-
                     <br>
                     <input type='email' name='nuEmail' value='Email' class='inputField'>
 
@@ -96,17 +94,22 @@ if ($db->connect_error) {
                     <input type='password' name='nuPass' value='Password' class='inputField'>
                     <br>
                     <!--<input type='password' name='nuPassConf' value='Password' class='inputField'>-->
-
+                    <input type='file' name='upload' >
                     <br>
                     <!--                <input type='text' name='nuSchool' value='School' class='inputField'>-->
                     <select id='selectSchool' name="school">
-                        <option value="School" disabled selected>Select School</option>
-                        <option value="1">School of Engineering</option>
-                        <option value="2">Jönköping International Business School</option>
-                        <option value="3">School of Education and Communication</option>
-                        <option value="4">School of Health and Welfare</option>
-                        <option value="5">Other</option>
-                    </select>
+                      <option value = "" disable selected>Select School</option>
+                          <?php
+                      $schoolDropQuery = "SELECT schoolID, schoolname FROM Schools";
+                      $stmt = $db->prepare($schoolDropQuery);
+                      $stmt->execute();
+                      $stmt -> bind_result($schoolID, $school);
+                      $array = array();
+
+                      while ($stmt-> fetch()){?>
+                    <option value="<?php echo $schoolID;?>"><?php echo $school; ?></option>
+                  <?php } ?>
+                </select>
 
                     <br>
                     <input type='submit' value='Submit!' class='submitBtn'>
@@ -228,40 +231,6 @@ if ($db->connect_error) {
         //checks if all input fields are filled out
         if (isset($_POST['orgname'])){
 
-//            //gets the input and gets rid of spaces (trim)
-//            $orgname = trim ($_POST['orgname']);
-//            $email = trim ($_POST['nuEmail']);
-//            //$school= trim ($_POST['']);
-//            $pass= trim ($_POST['nuPass']);
-//            //$passConf= trim ($_POST['nuPassConf']);
-//            $school= trim ($_POST['oschool']);
-//
-//
-//            //returns input as string with backslashes in front of predefined characters
-//            $orgname = addslashes ($orgname);
-//            $email = addslashes ($email);
-//            $pass= addslashes ($pass);
-//            //$passConf= addslashes ($passConf);
-//            $school= addslashes ($school);
-//
-//            //takes the password and hashes it
-//            $userpass= sha1($pass);
-//
-//
-//            //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
-//             $stmt = $db->prepare("INSERT INTO Users values ('', 'organisation', ?, ?, '', ?, '', '', ?)");
-//
-//            //binds the parameter
-//             $stmt->bind_param('ssss', $userpass, $email, $school, $organisation);
-//             $stmt->execute();
-//            //redirects the user to the login page after data is saved in db
-//             echo "<script>window.location.href='login.php'</script>";
-//             exit;
-
-
-
-
-
 
             //gets the input and gets rid of spaces (trim)
             $orgname = trim ($_POST['orgname']);
@@ -282,23 +251,58 @@ if ($db->connect_error) {
             $userpass= sha1($pass);
 
 
+
+            //-- CHECK IF MAIL ALREADY EXISTS ------------------------------------------
+            //-- get all emails from db
+            $mailQuery = "SELECT * FROM Users WHERE email = '{$email}'";
+            //echo $mailQuery;
+            $stmt = $db->prepare($mailQuery);
+            $result=mysqli_query($db, $mailQuery);
+            $email_nrRows = mysqli_num_rows($result);
+
+            //echo $email_nrRows;
+
             //check if all fields are filled out
             if (!$orgname || !$email || !$pass || !$school) {
                 echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
+            }else if($email_nrRows != 0){
+                echo("<p style='margin-top:150px;'>The email is already taken</p>");
             }
             else{
 
-            //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
-             $stmt = $db->prepare("INSERT INTO Users values ('', 'organisation', ?, ?, '', ?, '', '', ?)");
+              //-- check file format
+              if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
+                   $allowedextensions = array('jpg', 'jpeg', 'gif', 'png');
+                   $extension = strtolower(substr($_FILES['upload']['name'], strrpos($_FILES['upload']['name'], '.') + 1));
+                   $error = array ();
+                  //ERROR FILE FORMAT
+                   if(in_array($extension, $allowedextensions) === false){
+                      $error[] = 'This is not an image, upload is allowed only for images.';
+                      echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
+                  }
+                  //ERROR SIZE
+                  if($_FILES['upload']['size'] > 1000000){
+                    $error[]='The file exceeded the upload limit';
+                    echo("<p style='margin-top:150px; color:'black';>The file exceeded the upload limit</p>");
+                  }
+                  //NO ERROR
+                  if(empty($error)){
+                      $image = $_FILES['upload']['name'];
+                      move_uploaded_file($_FILES['upload']['tmp_name'], "uploadedfiles/" . $image);
 
-            //binds the parameter
-             $stmt->bind_param('ssss', $userpass, $email, $school, $organisation);
-             $stmt->execute();
-            //redirects the user to the login page after data is saved in db
-             //echo "<script>window.location.href='login.php'</script>";
-             exit;
+                      //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
+                      $stmt = $db->prepare("INSERT INTO Users values ('', 'organisation', ?, ?, ?, ?, '', '', ?)");
+                      $stmt->bind_param('ssss', $userpass, $email, $image, $school, $orgname);
+                       $stmt->execute();
+                      //redirects the user to the login page after data is saved in db
+                       echo "<script>window.location.href='login.php'</script>";
+
+                  }
+
+
             }
 
+        }
         }
 
 
