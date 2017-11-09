@@ -539,20 +539,38 @@ div.container form.loginForm input.inputField {
   margin-left: 10px;
   margin-top: 14px;
 }
+div.container {
+  text-align: center;
+  margin: auto;
+}
 div.container div#selectUserType {
   margin-top: 200px;
 }
 div.container div#selectUserType ul {
   list-style: none;
+  padding: 0;
 }
 div.container div#selectUserType ul li {
   font-family: 'Roboto', sans-serif;
-  font-size: 30px;
-  color: #ffffff;
+  font-size: 25px;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #87d7e2;
+  padding: 20px;
+  border-radius: 5px;
+}
+div.container div#selectUserType ul li input[type="radio"] {
+  position: absolute;
+  visibility: hidden;
+}
+div.container div#selectUserType ul li label {
+  cursor: pointer;
+  text-align: center;
 }
 div.container form.newUserForm {
   margin: 150px auto 50px auto;
   text-align: center;
+  color: #ffffff;
 }
 div.container form.newUserForm input.submitBtn {
   background: rgba(255, 255, 255, 0.7);
@@ -570,14 +588,42 @@ div.container form.newUserForm input.submitBtn:active {
   color: #ffffff;
 }
 div.container form.newUserForm input.inputField {
-  width: 49%;
+  margin-top: 2%;
+  width: 50%;
   height: 30px;
   border: none;
-  border-bottom: solid #ffffff;
+  border-bottom: solid #ffffff 2px;
+  border-radius: 0;
   color: #ffffff;
   background: none;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+}
+div.container form.newUserForm input.inputField::placeholder {
+  color: #ffffff;
+}
+div.container form.newUserForm #selectSchool {
+  margin: 2% 0 3%;
+  width: 52%;
+  height: 30px;
+  border: none;
+  border-bottom: solid #ffffff 2px;
+  background: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  border-radius: 0;
+}
+div.container form.newUserForm #selectSchool option {
+  background-color: #ffffff;
+}
+div.container form.newUserForm h4 {
+  color: #ffffff;
+}
+div.container form.newUserForm input[type="file"] {
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  width: 50%;
 }
 div.search {
   text-align: center;

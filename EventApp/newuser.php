@@ -30,11 +30,13 @@ if ($db->connect_error) {
             <ul>
                 <li>
                     <input type="radio" name="newsturadio" value="student" id='studentRadio' onclick='showUserForm()'>
-                    <label for="student">Student</label>
+                    <label for="student" onclick='showUserForm()'>Student</label>
                 </li>
                 <li>
                   <input type="radio" name="neworgradio" value="org" onclick='showUserForm()'>
-                  <label for="org">Organization</label>
+                  <label for="org" onclick='showUserForm()'>Organization</label>
+
+</li>
                 </li>
             </ul>
           </div>

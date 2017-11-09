@@ -29,7 +29,7 @@ session_start();
 ?>
 
 
-<!-- -----  SEARCH FORM  ------------------- -->
+-----  SEARCH FORM  -------------------
 <div class="search" action="">
   <form class="searchForm" action="search_org.php" method="POST">
     <input type="text" name="shTitle" placeholder="Keyword"><br>
@@ -238,7 +238,6 @@ session_start();
                 <?php
                 }
            }
-
 
 
 
