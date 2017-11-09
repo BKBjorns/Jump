@@ -4,7 +4,7 @@ session_start();
         header("Location:index.php");
     }
 
-    include("config.php");
+    include ("header.php");
     include("menu.php");
 
 
@@ -67,7 +67,7 @@ session_start();
       $title = htmlentities($shTitle);
       $security = mysqli_real_escape_string($db, $shTitle);
 
-      $title = addslashes($title);
+      $title = addslashes($shTitle);
   }
 
 
@@ -78,40 +78,40 @@ session_start();
 $query = "";
 
   if ($shTitle && !$shDate && !$shSchool) {
-      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'";
+      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%' ORDER by startdate, time";
     }
 
   if(!$shTitle && $shDate && !$shSchool){
-      $query = "SELECT * FROM Events WHERE startdate LIKE '%" . $shDate . "%'";
+      $query = "SELECT * FROM Events WHERE startdate LIKE '%" . $shDate . "%' ORDER by startdate, time";
       //echo $_POST['shDate'];
   }
 
   if(!$shTitle && !$shDate && $shSchool){
-      $query = "SELECT * FROM Events WHERE school LIKE '%" . $shSchool . "%'";
+      $query = "SELECT * FROM Events WHERE school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
       //echo $_POST['shSchool'];
   }
 
   if ($shTitle && $shDate && !$shSchool) {
-      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'AND startdate LIKE '%" . $shDate . "%'";
+      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'AND startdate LIKE '%" . $shDate . "%' ORDER by startdate, time";
   }
 
   if ($shTitle && !$shDate && $shSchool) {
-      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'AND school LIKE '%" . $shSchool . "%'";
+      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
   }
 
   if(!$shTitle && $shDate && $shSchool){
-      $query = "SELECT * FROM Events WHERE startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%'";
+      $query = "SELECT * FROM Events WHERE startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
       //echo $_POST['shDate'];
   }
 
   if ($shTitle && $shDate && $shSchool) {
-      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%' AND startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%'";
+      $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%' AND startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
   }
 
 
 
     $stmt = $db->prepare($query);
-    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $country);
+    $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $school, $country);
     $stmt->execute();
 
 
