@@ -25,13 +25,13 @@ $userID = $_SESSION['userID'];
 <!-- EVENT CARDS -------------------------------------------------------------->
 <div style="margin-top: 130px;" class="allEvents">
 <?php
-    
+
     //-- DELETE PASSED EVENTS --------------------------------------------------
     $current_time = date("Y/m/d");
 
     $stmt = $db->prepare("DELETE FROM Events WHERE startdate < '$current_time'");
     $stmt->execute();
-    
+
   //-- DELETE EVENT ------------------------------------------------------------
   if (isset($_POST['minus'])){
     $eventid = $_POST['eventID'];
@@ -40,18 +40,18 @@ $userID = $_SESSION['userID'];
     $stmt = $db->prepare($deleteQuery);
     $stmt->execute();
   }
-    
 
-  
-    
+
+
+
 //  //-- IF THE USER HAS NO ATTENDED EVENTS ----------------------------------------
-//  
+//
 //  $attendQuery = "SELECT eventID FROM Attend WHERE userID = '{$userid}' ";
 //
 //        $attend_stmt = $db->prepare($attendQuery);
 //        $attend_stmt->execute();
 //        $attend_stmt->bind_result($eventID);
-//    
+//
 //        $array = array();
 //        //-- STORE EVENTID IN ARRAY
 //        while($attend_stmt->fetch()){
@@ -60,8 +60,23 @@ $userID = $_SESSION['userID'];
 //        }
 //    //print_r ($array);
 //        $attend_stmt->close();
-    
-    
+
+  $attendQuery = "SELECT eventID FROM Attend WHERE userID = '$userID'";
+
+  $attend_stmt = $db->prepare($attendQuery);
+
+  $attend_stmt->execute();
+  $attend_stmt->bind_result($eventID);
+
+  $attend_stmt->store_result();
+  $attend_result = $attend_stmt->num_rows();
+
+  if($attend_result == 0){
+    echo "<h2>You have not attended any event!</h2>";
+  }else{
+
+
+
 //-- JOIN TO GET EVENTS USER ATTENDED ----------------------------------------
   $query = "SELECT Events.eventID, Events.title, Events.description, Events.startdate, Events.enddate, Events.time, Events.price, Events.location, Events.image, Events.link, Events.host FROM Events
   JOIN Attend on Events.eventID = Attend.eventID
@@ -77,7 +92,7 @@ $userID = $_SESSION['userID'];
 //      echo "<h4 style='margin-top: 10px;'>You have no attended events</h4>";
 //      exit();
 //  }
-    
+
   while($stmt->fetch()){ ?>
 
  <div class="eventContainerOne">
@@ -109,6 +124,7 @@ $userID = $_SESSION['userID'];
  <?php  } ?>
  </div>
 
+<?php } ?>
 
 <?php
 include("footer.php");
