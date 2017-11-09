@@ -74,46 +74,57 @@ if(isset($_POST['submit'])){
   }else{
     $query = "";
 
+
+
       if ($shTitle && !$shDate && !$shSchool) {
-          $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%' ORDER by startdate, time";
+          $query = "SELECT * FROM Events WHERE title OR host OR description LIKE '%" . $shTitle . "%' ORDER by startdate, time";
+          //echo "1";
         }
 
       if(!$shTitle && $shDate && !$shSchool){
           $query = "SELECT * FROM Events WHERE startdate LIKE '%" . $shDate . "%' ORDER by startdate, time";
           //echo $_POST['shDate'];
+          //echo "2";
       }
 
       if(!$shTitle && !$shDate && $shSchool){
           $query = "SELECT * FROM Events WHERE school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
           //echo $_POST['shSchool'];
+          //echo "3";
       }
+
+
 
       if ($shTitle && $shDate && !$shSchool) {
-          $query = "SELECT * FROM Events WHERE startdate = '{$shDate}' AND title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'";
-          echo "4";
+          $query = "SELECT * FROM Events WHERE title OR host OR description LIKE '%" . $shTitle . "%'AND startdate LIKE '%" . $shDate . "%' ORDER by startdate, time";
+          //echo "4";
       }
 
+
       if ($shTitle && !$shDate && $shSchool) {
-          $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%'AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
+          $query = "SELECT * FROM Events WHERE title OR host OR description LIKE '%" . $shTitle . "%'AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
+          //echo "5";
       }
 
       if(!$shTitle && $shDate && $shSchool){
           $query = "SELECT * FROM Events WHERE startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
           //echo $_POST['shDate'];
+          //echo "6";
       }
 
       if ($shTitle && $shDate && $shSchool) {
-          $query = "SELECT * FROM Events WHERE title LIKE '%" . $shTitle . "%' OR description like '%" . $shTitle . "%' OR host like '%" . $shTitle . "%' AND startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
+          $query = "SELECT * FROM Events WHERE title OR host OR description LIKE '%" . $shTitle . "%' AND startdate LIKE '%" . $shDate . "%' AND school LIKE '%" . $shSchool . "%' ORDER by startdate, time";
+          //echo "7";
       }
 
 
 
         $stmt = $db->prepare($query);
-        echo $query;
+        //echo $query;
         $stmt->bind_result($eventID, $title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host, $school, $country);
 
         $stmt->execute();
-        echo $eventID;
+        //echo $eventID;
 
     // When there is no search result
         $stmt->store_result();
@@ -124,8 +135,8 @@ if(isset($_POST['submit'])){
         }else{
           $userid = $_SESSION['userID'];
           $eventid = $_POST['eventID'];
-          echo $userid;
-          echo $eventid;
+          //echo $userid;
+          //echo $eventid;
           //-----ATTEND EVENT----------------------------------------------------------
            if (isset($_POST['plus'])){
 
@@ -171,7 +182,7 @@ if(isset($_POST['submit'])){
 
 
             while($stmt->fetch()){
-              echo $eventID,$title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host;
+              //echo $eventID,$title, $description, $startdate, $enddate, $time, $price, $location, $image, $link, $host;
               //-- ALREADY ATTENDED EVENTS ---------------------------------------
               if ((in_array ($eventID, $array))){?>
                   <div class="eventContainerOne">
@@ -179,7 +190,7 @@ if(isset($_POST['submit'])){
                       <form method="POST" action='user.php'>
                             <input type="submit" value="-" class="plusBtn" name="minus">
                             <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventid">
-                            echo $eventID;
+                            <!-- echo $eventID; -->
                         </form>
                       <div class="infoContainer">
                         <p class="eventTitle">
