@@ -133,8 +133,8 @@ if(isset($_POST['submit'])){
         if($noresult === 0){
           echo "Your search did not return any results";
         }else{
-          $userid = $_SESSION['userID'];
-          $eventid = $_POST['eventID'];
+          // $userid = $_SESSION['userID'];
+          // $eventid = $_POST['eventID'];
           //echo $userid;
           //echo $eventid;
           //-----ATTEND EVENT----------------------------------------------------------
