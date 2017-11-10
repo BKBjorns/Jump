@@ -128,3 +128,118 @@ margin:auto;
                  }
             }
 }
+
+
+
+
+//----------------------New user admin------------------
+     div.wrapper_admin{
+         div.container{
+           text-align: center;
+           margin-top: 40px;
+           font-family: @font-base;
+             margin: auto;
+
+            div#selectUserType{
+                margin-top: 200px;
+
+                ul{
+                    list-style: none;
+                    padding: 0;
+
+
+                    li #radio{
+                        font-family: @font-base;
+                        font-size: 25px;
+                        width: 50%;
+                        background-color: @color-transparent;
+                        color: @color-base !important;
+                        padding: 20px;
+                        border-radius: 5px;
+
+
+                        input[type="radio"]{
+                          position: absolute;
+                          visibility: hidden;
+                            color: @color-base;
+                        }
+
+                        input label{
+                            cursor: pointer;
+                            text-align: center;
+                            color: @color-base !important;
+                        }
+                    }
+                }
+            }
+            form.newUserForm{
+                 margin: 150px auto 50px auto;
+                 text-align: center;
+                 color: @color-grey;
+
+                 input.submitBtn{
+                     background: @color-transparent;
+                     height: 50px;
+                     width: 50%;
+                     border-radius: 3px;
+                     border: 2px solid @color-base;
+                     color: @color-base;
+                     font-size: @fontSize-Btn;
+                     margin-top: 2%;
+                 }
+
+                 input.submitBtn:active{
+                     background: none;
+                     border: solid 1px @color-transparent;
+                     background-color: @color-base;
+                     color: #ffffff;
+                 }
+
+                 input.inputField{
+                   margin-top: 2%;
+                    width: 50%;
+                    height: 30px;
+                    border: none;
+                    border-bottom: solid @color-base 2px;
+                    border-radius: 0;
+                    color: @color-base;
+                    background: none;
+                    font-family: @font-base;
+                    font-size: @fontSize-Btn;
+
+                 }
+
+                 input.inputField::placeholder{
+                   color: @color-base;
+                 }
+
+                 #selectSchool{
+                   margin: 2% 0 3%;
+                   width: 52%;
+                   height: 30px;
+                   border: none;
+                   border-bottom: solid @color-base 2px;
+                   background: none;
+                   font-family: @font-base;
+                   font-size: @fontSize-Btn;
+                   border-radius: 0;
+
+                   option{
+                     background-color: @color-base;
+                   }
+                 }
+                 input[type = "file"]{
+                   color: @color-base;
+                   font-family: @font-base;
+                   font-size: @fontSize-Btn;
+                   width: 50%;
+                 }
+            } 
+             
+        }
+         p{
+             color:@color-base;
+             font-size: 20px;
+             text-align: center;
+         }
+    }
