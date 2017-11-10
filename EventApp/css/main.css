@@ -181,6 +181,11 @@ div.wrapper div.container div.newuserdiv a {
   color: white;
   margin-top: -20px;
 }
+div.wrapper p {
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+}
 div.allEvents {
   background-size: cover;
   background-repeat: no-repeat;
