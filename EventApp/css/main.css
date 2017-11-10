@@ -19,7 +19,7 @@ h2 {
 }
 h4 {
   font-family: 'Roboto', sans-serif;
-  margin: 7px 0 2px;
+  margin: 7px 0px 2px;
   padding-left: 10px;
   color: #87d7e2;
 }
@@ -274,11 +274,6 @@ div.allEvents div.eventContainerOne div.infoContainer p.eventDescription {
   clear: left;
   padding: 0 10px 20px 10px;
   display: none;
-}
-div.allEvents div.eventContainer div.infoContainer p.descriptionHost,
-div.allEvents div.eventContainerFirst div.infoContainer p.descriptionHost,
-div.allEvents div.eventContainerOne div.infoContainer p.descriptionHost {
-  margin-bottom: 10px;
 }
 div.userInfo {
   width: 100%;

@@ -45,7 +45,8 @@ if ($db->connect_error) {
           <div class="infoContainer">
               <div class="eventTitle">
                  <?php
-                    echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p><p><strong>Location: </strong> $location</p>";
+                 echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p> <p><strong>Location: </strong> $location</p><p class='descriptionHost'><strong>$host</strong>
+                 </p>";
                   ?>
               </div>
               <button href="#" class="expanderBtn">
