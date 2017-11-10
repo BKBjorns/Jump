@@ -146,9 +146,9 @@ if ($db->connect_error) {
 
             //check if all fields are filled out
             if (!$firstname || !$lastname || !$email || !$pass || !$school) {
-                echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
+                echo("<p style='margin-top:0px;'>You must fill out all forms</p>");
             }else if($email_nrRows != 0){
-                echo("<p style='margin-top:150px;'>The email is already taken</p>");
+                echo("<p style='margin-top:0px;'>The email is already taken</p>");
             }
             else{
               //-- check file format
@@ -159,12 +159,12 @@ if ($db->connect_error) {
                   //ERROR FILE FORMAT
                    if(in_array($extension, $allowedextensions) === false){
                       $error[] = 'This is not an image, upload is allowed only for images.';
-                      echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
+                      echo("<p style='margin-top:0px; color:'black';>This is not an image, upload is allowed only for images.</p>");
                   }
                   //ERROR SIZE
                   if($_FILES['upload']['size'] > 1000000){
                     $error[]='The file exceeded the upload limit';
-                    echo("<p style='margin-top:150px; color:'black';>The file exceeded the upload limit</p>");
+                    echo("<p style='margin-top:0px; color:'black';>The file exceeded the upload limit</p>");
                   }
                   //NO ERROR
                   if(empty($error)){
@@ -230,9 +230,9 @@ if ($db->connect_error) {
 
         //check if all fields are filled out
         if (!$orgname || !$email || !$pass || !$school) {
-            echo("<p style='margin-top:150px;'>You must fill out all forms</p>");
+            echo("<p style='margin-top:0px;'>You must fill out all forms</p>");
         }else if($email_nrRows != 0){
-            echo("<p style='margin-top:150px;'>The email is already taken</p>");
+            echo("<p style='margin-top:0px;'>The email is already taken</p>");
         }
         else{
 
@@ -244,12 +244,12 @@ if ($db->connect_error) {
               //ERROR FILE FORMAT
                if(in_array($extension, $allowedextensions) === false){
                   $error[] = 'This is not an image, upload is allowed only for images.';
-                  echo("<p style='margin-top:150px; color:'black';>This is not an image, upload is allowed only for images.</p>");
+                  echo("<p style='margin-top:0px; color:'black';>This is not an image, upload is allowed only for images.</p>");
               }
               //ERROR SIZE
               if($_FILES['upload']['size'] > 1000000){
                 $error[]='The file exceeded the upload limit';
-                echo("<p style='margin-top:150px; color:'black';>The file exceeded the upload limit</p>");
+                echo("<p style='margin-top:0px; color:'black';>The file exceeded the upload limit</p>");
               }
               //NO ERROR
               if(empty($error)){
