@@ -202,10 +202,7 @@ if(isset($_POST['submit'])){
                              echo "$description";
                            ?>
                         </p>
-                        <p class="descriptionHost">
-                          <?php
-                          echo "<strong>$host</strong>" ?>
-                        </p>
+
                       </div>
                     </div>
               <?php
@@ -232,10 +229,7 @@ if(isset($_POST['submit'])){
                        echo "$description";
                      ?>
                   </p>
-                  <p class="descriptionHost">
-                    <?php
-                    echo "<strong>$host</strong>" ?>
-                  </p>
+                  
                 </div>
               </div>
               <?php
