@@ -2,7 +2,7 @@
 //-- SESSION HIJACKING PART ONE-------------------------------------------------
 ini_set('session.cookie_httponly', true);
 session_start();
-// ob_start();
+ob_start();
 
 
 include("header.php");

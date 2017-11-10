@@ -98,11 +98,11 @@ $userID = $_SESSION['userID'];
             <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
         </form>
       <div class="infoContainer">
-        <p class="eventTitle">
+        <div class="eventTitle">
            <?php
               echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
             ?>
-        </p>
+        </div>
         <button href="#" class="expanderBtn">
             <i class="fa fa-angle-down" aria-hidden="true"></i>
         </button>

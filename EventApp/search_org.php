@@ -161,11 +161,11 @@ if(isset($_POST['submit'])){
                              <i class="fa fa-pencil" aria-hidden="true"></i></a>';
                         ?>
                       <div class="infoContainer">
-                        <p class="eventTitle">
+                        <div class="eventTitle">
                            <?php
                               echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
                             ?>
-                        </p>
+                        </div>
                         <button href="#" class="expanderBtn">
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </button>
@@ -186,11 +186,11 @@ if(isset($_POST['submit'])){
                   <div class="eventContainerOne">
                       <div class="imgContainer" style="background-image: url('uploadedfiles/<?php echo "$image"; ?>');"></div>
                       <div class="infoContainer">
-                        <p class="eventTitle">
+                        <div class="eventTitle">
                            <?php
                               echo "<h4>$title</h4> <p><strong>Date:</strong> $startdate</p> <p><strong>Time: </strong> $time</p>";
                             ?>
-                        </p>
+                        </div>
                         <button href="#" class="expanderBtn">
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </button>
