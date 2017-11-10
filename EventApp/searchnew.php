@@ -137,11 +137,7 @@ if(isset($_POST['submit'])){
                  <?php
                     echo "$description";
                   ?>
-               </p>
-               <p class="descriptionHost">
-                 <?php
-                 echo "<strong>$host</strong>" ?>
-               </p>
+               </p>      
           </div>
         </div>
 

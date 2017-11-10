@@ -74,10 +74,7 @@ if ($db->connect_error) {
                    echo "$description";
                  ?>
               </p>
-              <p class="descriptionHost">
-                <?php
-                echo "<strong>$host</strong>" ?>
-              </p>
+              
             </div>
        </div>
     <?php  }
