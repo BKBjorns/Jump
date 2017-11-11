@@ -128,6 +128,7 @@ if ($db->connect_error) {
             $lastname = trim ($_POST['nuLastname']);
             $email = trim ($_POST['nuEmail']);
             $pass= trim ($_POST['nuPass']);
+            $school= trim ($_POST['school']);
 
 
             //-- XSS -----------------------------------------------------------------
@@ -145,6 +146,7 @@ if ($db->connect_error) {
             $lastname = addslashes ($lastname);
             $email = addslashes ($email);
             $pass= addslashes ($pass);
+            $school= addslashes ($school);
 
             $userpass= sha1($pass);
 
@@ -189,7 +191,7 @@ if ($db->connect_error) {
                        $stmt = $db->prepare("INSERT INTO Users values ('', 'student', ?, ?, ?, ?, ?, ?, '')");
 
                       //binds the parameter
-                       $stmt->bind_param('ssssss', $userpass, $email, $image, $school, $firstname, $lastname);
+                       $stmt->bind_param('sssiss', $userpass, $email, $image, $school, $firstname, $lastname);
                        $stmt->execute();
                       //redirects the user to the login page after data is saved in db
 					  echo "<script>window.location.href='admin_deleteuser.php'</script>";
@@ -273,7 +275,7 @@ if ($db->connect_error) {
 
                 //Takes the inputed values, which are the ones with a ? and inserts them to the Users table in the db
                 $stmt = $db->prepare("INSERT INTO Users values ('', 'organisation', ?, ?, ?, ?, '', '', ?)");
-                $stmt->bind_param('sssss', $userpass, $email, $image, $school, $orgname);
+                $stmt->bind_param('sssis', $userpass, $email, $image, $school, $orgname);
                 $stmt->execute();
                 //redirects the user to the login page after data is saved in db
                 echo "<script>window.location.href='admin_deleteuser.php'</script>";
