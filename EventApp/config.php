@@ -4,7 +4,7 @@
   $current_page = end($strings);
 
   $dbname = 'Jump2';
-  $dbuser = 'root';
-  $dbpass = '';
+  $dbuser = 'test';
+  $dbpass = '1234';
   $dbserver = 'localhost';
 ?>
