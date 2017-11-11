@@ -113,7 +113,7 @@ if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
           $stmt = $db->prepare($updateQuery);
           $stmt->execute();
           //echo "success!";
-          header("location:admin_events.php");
+          echo "<script>window.location.href='admin_events.php'</script>";
         }
       }
    ?>

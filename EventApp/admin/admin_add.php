@@ -98,7 +98,7 @@ if ($db->connect_error) {
           $stmt = $db->prepare($uploadQuery);
           $stmt->execute();
           //echo "<h3>Event has been added!</h3>";
-          header("location:admin_events.php");
+          echo "<script>window.location.href='admin_events.php'</script>";
         }
       }
    ?>
