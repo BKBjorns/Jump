@@ -117,7 +117,7 @@ if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
       $stmt = $db->prepare($updateQuery);
       $stmt->execute();
       //echo "success!";
-      header("location:organisation.php");
+      echo "<script>window.location.href='login.php'</script>";
     }
 
   }
