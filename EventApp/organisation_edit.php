@@ -97,7 +97,7 @@ if (isset($_FILES['upload']) && !empty($_FILES['upload'])){
     $description = addslashes($description);
 
      //-- FILE UPLOAD SECURITY/EXTENSIONS --------------------------------------
-     $allowedextensions = array('jpg', 'jpeg', 'gif', 'png', , 'gif');
+     $allowedextensions = array('jpg', 'jpeg', 'gif', 'png', 'gif');
      $extension = strtolower(substr($_FILES['upload']['name'], strrpos($_FILES['upload']['name'], '.') + 1));
      $error = array ();
 
