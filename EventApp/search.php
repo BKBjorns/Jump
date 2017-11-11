@@ -217,7 +217,7 @@ if(isset($_POST['submit'])){
                 <form method="POST" action='user.php'>
                       <input type="submit" value="+" class="plusBtn" name="plus">
                       <input type="hidden" value="<?php echo "$eventID"; ?>" name="eventID">
-                      <?php echo $eventID; ?>
+                      <?php //echo $eventID; ?>
                   </form>
                 <div class="infoContainer">
                   <p class="eventTitle">
