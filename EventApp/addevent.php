@@ -49,6 +49,7 @@ if ($db->connect_error) {
       $security = mysqli_real_escape_string($db, $location);
       $security = mysqli_real_escape_string($db, $description);
 
+
       $title = addslashes($title);
       $date = addslashes($date);
       $time = addslashes($time);
